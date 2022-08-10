@@ -39,6 +39,8 @@
         android:layout_width="373dp"
         android:layout_height="234dp"
         android:fontFamily="@font/e_light"
+        android:paddingLeft="50px"
+        android:paddingRight="50px"
         android:hint="설정에서 미리 써놓은 기본값을 써두고 아무것도 적지 않고 전송하기를 누르면 그 기본 값대로 전송되도록 ~ !!!"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
