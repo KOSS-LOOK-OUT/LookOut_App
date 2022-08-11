@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class Message_DefaultActivity extends AppCompatActivity {
 
     private ImageView home;
     private Button cancelButton;
+    private Button resetButton;
     EditText et_setting;
 
 
@@ -37,7 +39,16 @@ public class Message_DefaultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Message_DefaultActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(intent); //엑티비티 이동
+            }
+        });
+
+        resetButton = findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_setting.setText("");
+                Toast.makeText(getApplicationContext(), "초기화되었습니다!", Toast.LENGTH_LONG).show();
             }
         });
 
