@@ -2,7 +2,10 @@ package com.example.look_out;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,19 +15,32 @@ import android.widget.Toast;
 
 public class Message_DefaultActivity extends AppCompatActivity {
 
+    public static Context context_main;
     private ImageView home;
+    private Button saveButton;
     private Button cancelButton;
     private Button resetButton;
-    private Button saveButton;
+    String message = "default";
     EditText et_setting;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_default);
+        context_main = this;
 
         et_setting = (EditText)findViewById(R.id.et_setting);
+
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Message_DefaultActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -32,15 +48,6 @@ public class Message_DefaultActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Message_DefaultActivity.this, SettingActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Message_DefaultActivity.this, MainActivity.class);
-                startActivity(intent); //엑티비티 이동
             }
         });
 
@@ -57,12 +64,11 @@ public class Message_DefaultActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                message = et_setting.getText().toString();
                 Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Message_DefaultActivity.this, SettingActivity.class);
-                String message = et_setting.getText().toString();
-                intent.putExtra("message", message);
-                startActivity(intent);
             }
         });
 
     }
+
+}
