@@ -15,6 +15,7 @@ public class Message_DefaultActivity extends AppCompatActivity {
     private ImageView home;
     private Button cancelButton;
     private Button resetButton;
+    private Button saveButton;
     EditText et_setting;
 
 
@@ -52,5 +53,16 @@ public class Message_DefaultActivity extends AppCompatActivity {
             }
         });
 
+        saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Message_DefaultActivity.this, SettingActivity.class);
+                String message = et_setting.getText().toString();
+                intent.putExtra("message", message);
+                startActivity(intent);
+            }
+        });
+
     }
-}
