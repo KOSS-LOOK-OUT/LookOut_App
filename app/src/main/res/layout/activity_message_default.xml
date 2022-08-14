@@ -50,6 +50,7 @@
         android:fontFamily="@font/e_light"
         android:hint="응급 상황에 전송할 문구를 작성해주세요."
         android:textSize="20dp"
+        android:privateImeOptions="defaultInputmode=korean"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
