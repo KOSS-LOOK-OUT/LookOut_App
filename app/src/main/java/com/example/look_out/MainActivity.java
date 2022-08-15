@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +31,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("message");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if (value == "불이야") {
+                    Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
+                    startActivity(intent);
+                } else if (value == "도둑이야") {
+                    Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
+                    startActivity(intent);
+                } else if (value == "조심해") {
+                    Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
+                    startActivity(intent);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         int permissionCall = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         int permissionSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
