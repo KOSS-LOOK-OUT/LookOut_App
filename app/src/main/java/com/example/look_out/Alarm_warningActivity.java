@@ -10,6 +10,7 @@ import android.widget.Button;
 public class Alarm_warningActivity extends AppCompatActivity {
 
     private Button offButton;
+    private Button messageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,15 @@ public class Alarm_warningActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Alarm_warningActivity.this, MainActivity.class);
+                startActivity(intent); //엑티비티 이동
+            }
+        });
+
+        messageButton = findViewById(R.id.messageButton);
+        messageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Alarm_warningActivity.this, Message_119Activity.class);
                 startActivity(intent); //엑티비티 이동
             }
         });
