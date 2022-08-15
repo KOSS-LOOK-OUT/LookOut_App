@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,17 +36,22 @@ public class MainActivity extends AppCompatActivity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("message");
 
+        final Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 if (value == "불이야") {
+                    vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0); // 무한 진동
                     Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
                     startActivity(intent);
                 } else if (value == "도둑이야") {
+                    vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
                     Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
                     startActivity(intent);
                 } else if (value == "조심해") {
+                    vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
                     Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
                     startActivity(intent);
                 }
