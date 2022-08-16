@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent); //엑티비티 이동
             }
         });
