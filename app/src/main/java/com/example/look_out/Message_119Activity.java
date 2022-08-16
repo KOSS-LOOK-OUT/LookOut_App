@@ -18,13 +18,19 @@ public class Message_119Activity extends AppCompatActivity {
     private ImageView home;
     private EditText et_default;
     private Button sendButton_119;
+    String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_119);
 
-        String message = ((Message_DefaultActivity)Message_DefaultActivity.context_main).message;
+        try {
+            message = ((Message_DefaultActivity)Message_DefaultActivity.context_main).message;
+        } catch (Exception e) {
+            message = "";
+        }
+
         et_default = (EditText)findViewById(R.id.et_default);
         et_default.setText(message);
 
@@ -33,7 +39,7 @@ public class Message_119Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String phoneNo = "119";
-                String text = message;
+                String text = et_default.getText().toString();
 
                 sendSMS(phoneNo, text);
             }
