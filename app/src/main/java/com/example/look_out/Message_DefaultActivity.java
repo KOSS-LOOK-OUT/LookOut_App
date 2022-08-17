@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,9 +20,11 @@ public class Message_DefaultActivity extends AppCompatActivity {
     private Button saveButton;
     private Button cancelButton;
     private Button resetButton;
-    String message = "";
+    String message = "default";
     EditText et_setting;
     String shared = "file";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,5 +78,7 @@ public class Message_DefaultActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_LONG).show();
             }
         });
+
     }
+
 }

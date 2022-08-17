@@ -3,14 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_alarm_fire.xml" value="0.161231884057971" />
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_alarm_thief.xml" value="0.161231884057971" />
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_alarm_warning.xml" value="0.161231884057971" />
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_main.xml" value="0.161231884057971" />
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_message_112.xml" value="0.161231884057971" />
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_message_119.xml" value="0.161231884057971" />
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_message_default.xml" value="0.161231884057971" />
-        <entry key="..\:/Look_Out/app/src/main/res/layout/activity_setting.xml" value="0.161231884057971" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_alarm_fire.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_alarm_warning.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_message_112.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_message_119.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_message_default.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_setting.xml" value="0.2028985507246377" />
       </map>
     </option>
   </component>
