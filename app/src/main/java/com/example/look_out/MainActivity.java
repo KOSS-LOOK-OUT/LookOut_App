@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                if (value == "불이야") {
+                if (value.equals("불이야")) {
                     Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
                     startActivity(intent);
-                } else if (value == "도둑이야") {
+                } else if (value.equals("도둑이야")) {
                     Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
                     startActivity(intent);
-                } else if (value == "조심해") {
+                } else if (value.equals("조심해")) {
                     Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
                     startActivity(intent);
                 }
