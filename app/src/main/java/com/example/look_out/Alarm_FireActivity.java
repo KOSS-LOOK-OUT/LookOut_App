@@ -58,6 +58,7 @@ public class Alarm_FireActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 vibrator.cancel();
+                MainActivity.flag = true;
                 Intent intent = new Intent(Alarm_FireActivity.this, MainActivity.class);
                 startActivity(intent); //엑티비티 이동
             }
