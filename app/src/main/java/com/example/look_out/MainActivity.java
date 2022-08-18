@@ -1,6 +1,7 @@
 package com.example.look_out;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
+    static Boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +36,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("message");
+        DatabaseReference ref = database.getReference("device_1/content");
 
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey){
                 String value = dataSnapshot.getValue(String.class);
+                System.out.println("childadded:"+value);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+                String value = dataSnapshot.getValue(String.class);
+                System.out.println(value);
                 if (value.equals("불이야")) {
                     Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
                     startActivity(intent);
@@ -49,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
                     startActivity(intent);
                 }
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
