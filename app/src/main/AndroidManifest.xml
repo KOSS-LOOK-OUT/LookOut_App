@@ -5,7 +5,7 @@
 
     <!-- 무음모드일 때 진동 설정하기 위한 퍼미션-->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    
+
     <!-- 메시지 보내기 위한 퍼미션 -->
     "<uses-permission android:name="android.permission.SEND_SMS" />"
     "<uses-permission android:name="android.permission.RECEIVE_SMS" />"

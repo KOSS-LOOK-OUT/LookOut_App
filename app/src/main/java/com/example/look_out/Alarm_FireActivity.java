@@ -35,8 +35,7 @@ public class Alarm_FireActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 vibrator.cancel();
-
-                String phoneNo = "01022689761";
+                String phoneNo = "119";
 
                 Context c = view.getContext();
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNo));
@@ -59,7 +58,7 @@ public class Alarm_FireActivity extends AppCompatActivity {
             }
         });
 
-        
+
         offButton = findViewById(R.id.offButton);
         offButton.setOnClickListener(new View.OnClickListener() {
             @Override

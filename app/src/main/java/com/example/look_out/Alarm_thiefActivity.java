@@ -34,7 +34,7 @@ public class Alarm_thiefActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 vibrator.cancel();
-                String phoneNo = "01022689761";
+                String phoneNo = "112";
 
                 Context c = view.getContext();
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNo));

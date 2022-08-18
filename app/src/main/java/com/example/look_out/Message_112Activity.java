@@ -36,7 +36,7 @@ public class Message_112Activity extends AppCompatActivity {
         sendButton_112.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNo = "01022689761";
+                String phoneNo = "112";
                 String text = et_default.getText().toString();
 
                 sendSMS(phoneNo, text);

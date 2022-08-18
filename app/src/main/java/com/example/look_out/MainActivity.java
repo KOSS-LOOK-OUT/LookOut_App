@@ -16,7 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +33,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("message");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if (value.equals("불이야")) {
+                    Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
+                    startActivity(intent);
+                } else if (value.equals("도둑이야")) {
+                    Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
+                    startActivity(intent);
+                } else if (value.equals("조심해")) {
+                    Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
+                    startActivity(intent);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         int permissionCall = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         int permissionSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
