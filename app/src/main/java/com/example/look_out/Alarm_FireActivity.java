@@ -57,6 +57,7 @@ public class Alarm_FireActivity extends AppCompatActivity {
             }
         });
 
+        
         offButton = findViewById(R.id.offButton);
         offButton.setOnClickListener(new View.OnClickListener() {
             @Override
