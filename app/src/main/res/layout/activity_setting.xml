@@ -131,6 +131,7 @@
         android:layout_height="wrap_content"
         android:switchMinWidth="50dp"
         android:switchPadding="20dp"
+        android:fontFamily="@font/e_light"
         android:text="무음모드일 경우 진동"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
