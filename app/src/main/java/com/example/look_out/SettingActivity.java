@@ -57,5 +57,6 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent); //엑티비티 이동
             }
         });
+
     }
 }
