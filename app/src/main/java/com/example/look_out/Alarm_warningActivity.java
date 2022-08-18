@@ -27,7 +27,9 @@ public class Alarm_warningActivity extends AppCompatActivity {
         if(SettingActivity.Sound.isChecked()) {
             vibrator.vibrate(new long[]{100, 1000, 100, 500, 100, 500, 100, 1000}, 0); // 무한 진동
         }
-        
+
+
+
         callButton = (Button) findViewById(R.id.callButton);
         callButton.setOnClickListener(new View.OnClickListener() {
             @Override
