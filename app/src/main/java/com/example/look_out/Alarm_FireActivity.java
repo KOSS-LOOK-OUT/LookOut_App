@@ -10,20 +10,24 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 
 public class Alarm_FireActivity extends AppCompatActivity {
 
     private Button callButton;
     private Button offButton;
     private Button messageButton;
+    private Switch Sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_fire);
 
-        final Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0); // 무한 진동
+        final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if(SettingActivity.Sound.isChecked()) {
+            vibrator.vibrate(new long[]{100, 1000, 100, 500, 100, 500, 100, 1000}, 0); // 무한 진동
+        }
 
         callButton = (Button) findViewById(R.id.callButton);
         callButton.setOnClickListener(new View.OnClickListener() {
