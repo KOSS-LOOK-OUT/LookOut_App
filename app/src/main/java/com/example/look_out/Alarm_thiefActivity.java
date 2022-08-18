@@ -57,6 +57,7 @@ public class Alarm_thiefActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 vibrator.cancel();
+                MainActivity.flag = true;
                 Intent intent = new Intent(Alarm_thiefActivity.this, Message_112Activity.class);
                 startActivity(intent); //엑티비티 이동
             }
