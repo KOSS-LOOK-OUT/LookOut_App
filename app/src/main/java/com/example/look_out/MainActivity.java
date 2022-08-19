@@ -99,4 +99,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    
+    public void onBackPressed(){
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - presstime;
+
+        if (0 <= intervalTime && finishtimed >= intervalTime){
+            finish();
+        } else{
+            presstime = tempTime;
+            Toast.makeText(getApplicationContext(), "한 번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    
 }
+
+
