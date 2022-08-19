@@ -68,4 +68,8 @@ public class Alarm_warningActivity extends AppCompatActivity {
             }
         });
     }
+    
+        public boolean onKeyDown(int keycode, KeyEvent event){
+        return true;
+    }
 }
