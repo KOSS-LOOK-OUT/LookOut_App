@@ -67,4 +67,8 @@ public class Alarm_thiefActivity extends AppCompatActivity {
             }
         });
     }
+    
+        public boolean onKeyDown(int keycode, KeyEvent event){
+        return true;
+    }
 }
