@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -18,6 +20,7 @@ public class SettingActivity extends AppCompatActivity {
     private ImageView home;
     private Button messagedefault;
     static Switch Sound;
+    String shared = "file";
 
 
     @Override
@@ -26,15 +29,30 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         Sound = findViewById(R.id.Sound);
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+        Boolean sound = sharedPreferences.getBoolean("switch", false);
+        Sound.setChecked(sound);
+
         Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     //토스트 메시지(무음모드인 경우에도 진동이 울립니다.)
                     Toast.makeText(SettingActivity.this, "무음모드인 경우에도 진동이 울립니다.", Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("switch", Sound.isChecked());
+                    editor.commit();
                 } else{
                     //토스트 메시지(무음모드인 경우 진동이 울리지 않습니다.)
                     Toast.makeText(SettingActivity.this, "무음모드인 경우 진동이 울리지 않습니다.", Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("switch", Sound.isChecked());
+                    editor.commit();
 
                 }
             }
@@ -44,7 +62,7 @@ public class SettingActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+                Intent intent = new Intent(SettingActivity.this, Alarm_FireActivity.class);
                 startActivity(intent); //엑티비티 이동
             }
         });
@@ -57,6 +75,6 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent); //엑티비티 이동
             }
         });
-
     }
+
 }
