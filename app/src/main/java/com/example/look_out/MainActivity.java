@@ -23,7 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-
+    private final long finishtimed = 1500;
+    private long presstime = 0;
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
     private Button test;
