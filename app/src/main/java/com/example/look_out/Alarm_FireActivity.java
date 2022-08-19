@@ -69,4 +69,8 @@ public class Alarm_FireActivity extends AppCompatActivity {
             }
         });
     }
+    
+        public boolean onKeyDown(int keycode, KeyEvent event){
+        return true;
+    }
 }
