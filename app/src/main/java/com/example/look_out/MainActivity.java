@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
         long intervalTime = tempTime - presstime;
 
         if (0 <= intervalTime && finishtimed >= intervalTime){
-            finish();
+            ActivityCompat.finishAffinity(this);
+            System.exit(0);
         } else{
             presstime = tempTime;
             Toast.makeText(getApplicationContext(), "한 번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
