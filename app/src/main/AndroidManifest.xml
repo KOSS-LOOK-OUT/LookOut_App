@@ -33,22 +33,13 @@
         android:theme="@style/Theme.Look_Out"
         tools:targetApi="31">
         <activity
-            android:name=".Message_112Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Message_119Activity"
+            android:name=".MessageActivity"
             android:exported="false" />
         <activity
             android:name=".Message_DefaultActivity"
             android:exported="false" />
         <activity
-            android:name=".Alarm_warningActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Alarm_thiefActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Alarm_FireActivity"
+            android:name=".AlarmActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"
