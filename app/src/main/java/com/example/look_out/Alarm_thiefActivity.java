@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -62,7 +63,6 @@ public class Alarm_thiefActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 vibrator.cancel();
-                MainActivity.flag = true;
                 Intent intent = new Intent(Alarm_thiefActivity.this, Message_112Activity.class);
                 startActivity(intent); //엑티비티 이동
             }
