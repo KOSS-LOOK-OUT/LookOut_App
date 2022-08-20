@@ -34,6 +34,7 @@ public class Message_119Activity extends AppCompatActivity {
         et_default = (EditText)findViewById(R.id.et_default);
         et_default.setText(message);
 
+
         sendButton_119 = (Button) findViewById(R.id.sendButton_119);
         sendButton_119.setOnClickListener(new View.OnClickListener() {
             @Override

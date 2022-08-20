@@ -25,10 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-
+    private final long finishtimed = 1500;
+    private long presstime = 0;
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
-    static Boolean flag = false;
+    private Button test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,4 +115,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void onBackPressed(){
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - presstime;
+
+        if (0 <= intervalTime && finishtimed >= intervalTime){
+            ActivityCompat.finishAffinity(this);
+            System.exit(0);
+        } else{
+            presstime = tempTime;
+            Toast.makeText(getApplicationContext(), "한 번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

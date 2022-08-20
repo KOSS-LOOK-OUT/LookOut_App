@@ -99,15 +99,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="127dp"
-        android:layout_height="73dp"
+        android:layout_width="88dp"
+        android:layout_height="67dp"
         android:src="@drawable/sound"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.41" />
+        app:layout_constraintVertical_bias="0.412" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -131,6 +131,7 @@
         android:layout_height="wrap_content"
         android:switchMinWidth="50dp"
         android:switchPadding="20dp"
+        android:fontFamily="@font/e_light"
         android:text="무음모드일 경우 진동"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -22,6 +22,7 @@ public class Message_DefaultActivity extends AppCompatActivity {
     private Button resetButton;
     String message = "default";
     EditText et_setting;
+    String shared = "file";
 
 
 
@@ -29,9 +30,14 @@ public class Message_DefaultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_default);
-        context_main = this;
 
         et_setting = (EditText)findViewById(R.id.et_setting);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+        message = sharedPreferences.getString("message", "");
+        et_setting.setText(message);
+
+        context_main = this;
 
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +71,10 @@ public class Message_DefaultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 message = et_setting.getText().toString();
+                SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("message", message);
+                editor.commit();
                 Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_LONG).show();
             }
         });

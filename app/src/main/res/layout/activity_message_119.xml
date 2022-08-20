@@ -41,6 +41,7 @@
         android:layout_height="234dp"
         android:fontFamily="@font/e_light"
         android:hint="119에 전송할 문자를 작성해주세요.."
+        android:privateImeOptions="defaultInputmode=korean"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.421"

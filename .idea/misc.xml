@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_alarm_fire.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_alarm_warning.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_message_112.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_message_119.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_message_default.xml" value="0.2028985507246377" />
+        <entry key="..\:/Users/kimji/AndroidStudioProjects/LookOut_App-contact/app/src/main/res/layout/activity_setting.xml" value="0.2028985507246377" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
