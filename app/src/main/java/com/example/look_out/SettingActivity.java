@@ -21,39 +21,36 @@ public class SettingActivity extends AppCompatActivity {
     private Button messagedefault;
     static Switch Sound;
     String shared = "file";
-
+    Boolean sound;
+    public static Context context_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        context_main = this;
+
         Sound = findViewById(R.id.Sound);
         SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-        Boolean sound = sharedPreferences.getBoolean("switch", false);
+        sound = sharedPreferences.getBoolean("switch", false);
         Sound.setChecked(sound);
 
         Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("switch", Sound.isChecked());
+                editor.commit();
+
                 if(isChecked){
                     //토스트 메시지(무음모드인 경우에도 진동이 울립니다.)
                     Toast.makeText(SettingActivity.this, "무음모드인 경우에도 진동이 울립니다.", Toast.LENGTH_SHORT).show();
-
-                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("switch", Sound.isChecked());
-                    editor.commit();
                 } else{
                     //토스트 메시지(무음모드인 경우 진동이 울리지 않습니다.)
                     Toast.makeText(SettingActivity.this, "무음모드인 경우 진동이 울리지 않습니다.", Toast.LENGTH_SHORT).show();
-
-                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("switch", Sound.isChecked());
-                    editor.commit();
-
                 }
             }
         });
