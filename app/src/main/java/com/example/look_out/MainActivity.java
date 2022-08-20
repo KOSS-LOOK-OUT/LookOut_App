@@ -17,14 +17,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+//import com.google.firebase.database.ChildEventListener;
+//import com.google.firebase.database.DataSnapshot;
+//import com.google.firebase.database.DatabaseError;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
+    public static boolean flag;
     private final long finishtimed = 1500;
     private long presstime = 0;
     private ImageView setting;
@@ -36,42 +37,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("device_1/content");
-
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey){
-                String value = dataSnapshot.getValue(String.class);
-                System.out.println("childadded:"+value);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                String value = dataSnapshot.getValue(String.class);
-                System.out.println(value);
-                if (value.equals("불이야")) {
-                    Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
-                    startActivity(intent);
-                } else if (value.equals("도둑이야")) {
-                    Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
-                    startActivity(intent);
-                } else if (value.equals("조심해")) {
-                    Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
-                    startActivity(intent);
-                }
-            }
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+//        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference ref = database.getReference("device_1/content");
+//
+//        ref.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey){
+//                String value = dataSnapshot.getValue(String.class);
+//                System.out.println("childadded:"+value);
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+//                String value = dataSnapshot.getValue(String.class);
+//                System.out.println(value);
+//                if (value.equals("불이야")) {
+//                    Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
+//                    startActivity(intent);
+//                } else if (value.equals("도둑이야")) {
+//                    Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
+//                    startActivity(intent);
+//                } else if (value.equals("조심해")) {
+//                    Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                System.out.println("The read failed: " + databaseError.getCode());
+//            }
+//        });
 
         int permissionCall = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
         int permissionSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
