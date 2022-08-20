@@ -28,15 +28,14 @@ public class AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
 
-        value = ((MainActivity)MainActivity.context_main).value;
+        value = ((MainActivity) MainActivity.context_main).value;
         callButton = (Button) findViewById(R.id.callButton);
-        messageButton = (Button)findViewById(R.id.messageButton);
+        messageButton = (Button) findViewById(R.id.messageButton);
 
-        if ("도둑이야".equals(value)){
+        if ("도둑이야".equals(value)) {
             callButton.setText("112 전화");
             messageButton.setText("112 문자");
-        }
-        else {
+        } else {
             callButton.setText("119 전화");
             messageButton.setText("119 문자");
         }
@@ -45,8 +44,14 @@ public class AlarmActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         textView.setText("\"" + value + "\" 소리가\n 감지되었습니다!");
 
+        try {
+            sound = ((SettingActivity) SettingActivity.context_main).sound;
+        } catch (Exception e) {
+            sound = false;
+        }
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if(SettingActivity.Sound.isChecked()) {
+
+        if (sound) {
             vibrator.vibrate(new long[]{100, 1000, 100, 500, 100, 500, 100, 1000}, 0); // 무한 진동
         }
 
@@ -88,7 +93,7 @@ public class AlarmActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onKeyDown(int keycode, KeyEvent event){
+    public boolean onKeyDown(int keycode, KeyEvent event) {
         return true;
     }
 }
