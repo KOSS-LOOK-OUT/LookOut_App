@@ -7,9 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <!-- 메시지 보내기 위한 퍼미션 -->
-    "<uses-permission android:name="android.permission.SEND_SMS" />"
-    "<uses-permission android:name="android.permission.RECEIVE_SMS" />"
-    "<uses-permission android:name="android.permission.READ_PHONE_STATE" />"
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 전화 걸기 위한 퍼미션 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.DIAL_PHONE" />

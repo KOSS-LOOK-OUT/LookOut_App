@@ -25,7 +25,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-    public static boolean flag;
     private final long finishtimed = 1500;
     private long presstime = 0;
     private ImageView setting;

@@ -133,6 +133,7 @@
         android:switchPadding="20dp"
         android:fontFamily="@font/e_light"
         android:text="무음모드일 경우 진동"
+        android:textColor="@color/black"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
