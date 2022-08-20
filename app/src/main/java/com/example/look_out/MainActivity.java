@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
             public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
                 String value = dataSnapshot.getValue(String.class);
                 System.out.println(value);
-                if (value.equals("불이야")) {
+                if ("불이야".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
                     startActivity(intent);
-                } else if (value.equals("도둑이야")) {
+                } else if ("도둑이야".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
                     startActivity(intent);
-                } else if (value.equals("조심해")) {
+                } else if ("조심해".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
                     startActivity(intent);
                 }
