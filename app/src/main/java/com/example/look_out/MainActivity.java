@@ -25,16 +25,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
+    public static Context context_main;
     private final long finishtimed = 1500;
     private long presstime = 0;
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
     private Button test;
+    String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context_main = this;
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("device_1/content");
@@ -42,25 +46,26 @@ public class MainActivity extends AppCompatActivity {
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey){
-                String value = dataSnapshot.getValue(String.class);
+                value = dataSnapshot.getValue(String.class);
                 System.out.println("childadded:"+value);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                String value = dataSnapshot.getValue(String.class);
+                value = dataSnapshot.getValue(String.class);
                 System.out.println(value);
-                if ("불이야".equals(value)) {
-                    Intent intent = new Intent(MainActivity.this, Alarm_FireActivity.class);
+                if ("불이야".equals(value)){
+                    Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                     startActivity(intent);
-                } else if ("도둑이야".equals(value)) {
-                    Intent intent = new Intent(MainActivity.this, Alarm_thiefActivity.class);
-                    startActivity(intent);
-                } else if ("조심해".equals(value)) {
-                    Intent intent = new Intent(MainActivity.this, Alarm_warningActivity.class);
+                } else if("도둑이야".equals(value)){
+                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                        startActivity(intent);
+                } else if("조심해".equals(value)) {
+                    Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                     startActivity(intent);
                 }
             }
+
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {}
             @Override
