@@ -9,4 +9,7 @@
 
     <font android:fontStyle="normal"
         android:font="@font/e_bold"/>
+
+    <font android:fontStyle="normal"
+        android:font="@font/SemiboldItalic"/>
 </font-family>
