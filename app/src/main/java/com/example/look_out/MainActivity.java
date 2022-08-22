@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -24,14 +25,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     public static Context context_main;
     private final long finishtimed = 1500;
     private long presstime = 0;
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
-    private Button test;
     String value;
+    List<String> al_log = new ArrayList<>();
+    String shared = "file";
+    String allog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context_main = this;
+
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+        allog = sharedPreferences.getString("allog", "");
+        al_log.add(allog);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("device_1/content");
@@ -56,12 +68,29 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(value);
                 if ("불이야".equals(value)){
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                    allog = getTime() + " 불이야";
+                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("allog", allog);
+                    editor.commit();
                     startActivity(intent);
+
                 } else if("도둑이야".equals(value)){
-                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                        startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                    allog = getTime() + " 도둑이야";
+                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("allog", allog);
+                    editor.commit();
+                    startActivity(intent);
+
                 } else if("조심해".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                    allog = getTime() + " 조심해";
+                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("allog", allog);
+                    editor.commit();
                     startActivity(intent);
                 }
             }
@@ -132,6 +161,15 @@ public class MainActivity extends AppCompatActivity {
             presstime = tempTime;
             Toast.makeText(getApplicationContext(), "한 번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // 현재 시간을 "yyyy-MM-dd hh:mm:ss"로 표시하는 메소드
+    private String getTime() {
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String getTime = dateFormat.format(date);
+        return getTime;
     }
 
 }
