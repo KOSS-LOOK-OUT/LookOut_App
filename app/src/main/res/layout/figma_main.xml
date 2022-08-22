@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.16" />
 
     <ImageView
-        android:id="@+id/ImageView_circle"
+        android:id="@+id/iconCircle"
         android:layout_width="212dp"
         android:layout_height="205dp"
         android:src="@drawable/lookout_circle"
@@ -51,6 +51,7 @@
         app:layout_constraintVertical_bias="0.622" />
 
     <ImageView
+        android:id="@+id/setting"
         android:layout_width="35dp"
         android:layout_height="39dp"
         android:src="@drawable/settingIcon"
