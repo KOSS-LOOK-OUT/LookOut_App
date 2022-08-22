@@ -13,7 +13,7 @@
         android:layout_height="41dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:fontFamily="@font/semibolditalic"
+        android:fontFamily="@font/"
         android:gravity="top"
         android:text="Look Out"
         android:textColor="#D9D9D9"
