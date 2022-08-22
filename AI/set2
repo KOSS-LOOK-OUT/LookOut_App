@@ -1,0 +1,20 @@
+from os import listdir
+from os.path import isdir, join
+from tensorflow.keras import layers, models
+import numpy as np
+
+# Create list of all targets (minus background noise)
+dataset_path = 'C:/Users/LG-PC/Desktop/data_speech_commands_v0.02'
+all_targets = all_targets = [name for name in listdir(dataset_path) if isdir(join(dataset_path, name))]
+all_targets.remove('_background_noise_')
+print(all_targets)
+
+# Settings
+feature_sets_path = 'C:/Users/LG-PC/Desktop/result'
+feature_sets_filename = 'all_targets_mfcc_sets.npz'
+model_filename = 'wake_word_stop_model.h5'
+wake_word = 'stop'
+
+# Load feature sets
+feature_sets = np.load(join(feature_sets_path, feature_sets_filename))
+print(feature_sets.files)
