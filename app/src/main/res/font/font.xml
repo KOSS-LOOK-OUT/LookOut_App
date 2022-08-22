@@ -11,5 +11,5 @@
         android:font="@font/e_bold"/>
 
     <font android:fontStyle="normal"
-        android:font="@font/SemiboldItalic"/>
+        android:font="@font/Semibolditalic"/>
 </font-family>
