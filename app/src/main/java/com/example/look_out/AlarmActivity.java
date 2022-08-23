@@ -61,6 +61,8 @@ public class AlarmActivity extends AppCompatActivity {
             public void onClick(View view) {
                 vibrator.cancel();
                 String phoneNo = "119";
+                if("도둑이야".equals(value)){ phoneNo = "112";}
+                
                 Context c = view.getContext();
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNo));
 
