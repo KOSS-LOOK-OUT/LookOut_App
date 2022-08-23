@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private long presstime = 0;
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
+    private ImageView iconCircle;
     String value;
     List<String> al_log = new ArrayList<>();
     String shared = "file";
@@ -57,16 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
         ref.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey){
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 value = dataSnapshot.getValue(String.class);
-                System.out.println("childadded:"+value);
+                System.out.println("childadded:" + value);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
                 value = dataSnapshot.getValue(String.class);
                 System.out.println(value);
-                if ("불이야".equals(value)){
+                if ("불이야".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                     allog = getTime() + " 불이야";
                     SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.commit();
                     startActivity(intent);
 
-                } else if("도둑이야".equals(value)){
+                } else if ("도둑이야".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                     allog = getTime() + " 도둑이야";
                     SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.commit();
                     startActivity(intent);
 
-                } else if("조심해".equals(value)) {
+                } else if ("조심해".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                     allog = getTime() + " 조심해";
                     SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
@@ -96,11 +97,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
@@ -129,47 +133,48 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1000) {
-            boolean check_result = true;
-            // 모든 퍼미션을 허용했는지 체크
-            for (int result : grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    check_result = false;
-                    break;
+        public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+            if (requestCode == 1000) {
+                boolean check_result = true;
+                // 모든 퍼미션을 허용했는지 체크
+                for (int result : grantResults) {
+                    if (result != PackageManager.PERMISSION_GRANTED) {
+                        check_result = false;
+                        break;
+                    }
+                }
+                // 권한 체크에 동의를 하지 않으면 안드로이드 종료
+                if (check_result == true) {
+                    Toast.makeText(this, "앱 실행을 위한 권한이 설정 되었습니다", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "앱 실행을 위한 권한이 취소 되었습니다", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
-            // 권한 체크에 동의를 하지 않으면 안드로이드 종료
-            if(check_result == true) {
-                Toast.makeText(this, "앱 실행을 위한 권한이 설정 되었습니다", Toast.LENGTH_LONG).show();
+        }
+
+
+        //뒤로가기 두 번 눌러서 종료하기
+        public void onBackPressed () {
+            long tempTime = System.currentTimeMillis();
+            long intervalTime = tempTime - presstime;
+
+            if (0 <= intervalTime && finishtimed >= intervalTime) {
+                ActivityCompat.finishAffinity(this);
+                System.exit(0);
+            } else {
+                presstime = tempTime;
+                Toast.makeText(getApplicationContext(), "한 번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
             }
-            else {
-                Toast.makeText(this, "앱 실행을 위한 권한이 취소 되었습니다", Toast.LENGTH_LONG).show();
-                finish();
-            }
+        }
+
+        // 현재 시간을 "yyyy-MM-dd hh:mm:ss"로 표시하는 메소드
+        private String getTime () {
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String getTime = dateFormat.format(date);
+            return getTime;
         }
     }
 
-    public void onBackPressed(){
-        long tempTime = System.currentTimeMillis();
-        long intervalTime = tempTime - presstime;
-
-        if (0 <= intervalTime && finishtimed >= intervalTime){
-            ActivityCompat.finishAffinity(this);
-            System.exit(0);
-        } else{
-            presstime = tempTime;
-            Toast.makeText(getApplicationContext(), "한 번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    // 현재 시간을 "yyyy-MM-dd hh:mm:ss"로 표시하는 메소드
-    private String getTime() {
-        long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String getTime = dateFormat.format(date);
-        return getTime;
-    }
-
-}
