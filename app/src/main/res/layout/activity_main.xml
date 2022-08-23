@@ -26,9 +26,9 @@
 
     <ImageView
         android:id="@+id/iconCircle"
-        android:layout_width="212dp"
-        android:layout_height="205dp"
-        android:src="@drawable/lookout_circle"
+        android:layout_width="195dp"
+        android:layout_height="195dp"
+        android:src="@drawable/group22"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
