@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity {
 
-
+    private ImageView backButton;
     private ImageButton messagedefault;
     private ImageButton settingalarm;
     private ImageButton settingdevice;
@@ -24,6 +24,15 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         messagedefault = findViewById(R.id.messagedefault);
         messagedefault.setOnClickListener(new View.OnClickListener() {
