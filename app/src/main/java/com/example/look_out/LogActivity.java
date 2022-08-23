@@ -16,8 +16,8 @@ import java.util.List;
 public class LogActivity extends AppCompatActivity {
 
     private ListView listView;
-    List<String> al_log = new ArrayList<>();
-    List<String> allog = new ArrayList<>();
+    ArrayList<String> al_log = new ArrayList<>();
+    ArrayList<String> allog = new ArrayList<>();
 
 
     @Override
