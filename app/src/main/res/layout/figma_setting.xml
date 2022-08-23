@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.181" />
 
     <ImageButton
-        android:id="@+id/settingdevice"
+        android:id="@+id/settingalarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00ff0000"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.261" />
 
     <ImageButton
-        android:id="@+id/settingalarm"
+        android:id="@+id/settingdevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00ff0000"

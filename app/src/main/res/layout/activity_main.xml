@@ -3,47 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F1F0E8"
-    tools:context=".MainActivity">
+    android:background="#212127"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="221dp"
-        android:layout_height="321dp"
-        android:src="@drawable/lookout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.121" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:fontFamily="@font/e_light"
-        android:text="청각장애인을 위한 음성 기반 위험 안내 어플"
-        android:textColor="#5F5F5F"
-        android:textSize="20dp"
+        android:id="@+id/textView3"
+        android:layout_width="145dp"
+        android:layout_height="41dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/semibolditalic"
+        android:gravity="top"
+        android:text="Look Out"
+        android:textColor="#D9D9D9"
+        android:textSize="90px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintVertical_bias="0.16" />
+
+    <ImageView
+        android:id="@+id/iconCircle"
+        android:layout_width="212dp"
+        android:layout_height="205dp"
+        android:src="@drawable/lookout_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.391" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="위험한 소리를 감지하고 있습니다."
+        android:textColor="#70737B"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.622" />
 
     <ImageView
         android:id="@+id/setting"
-        android:layout_width="108dp"
-        android:layout_height="90dp"
-        android:src="@drawable/setting"
+        android:layout_width="35dp"
+        android:layout_height="39dp"
+        android:src="@drawable/settingicon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.722"/>
-
+        app:layout_constraintVertical_bias="0.829" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
