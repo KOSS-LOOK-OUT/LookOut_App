@@ -54,9 +54,21 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         };
         al_log = ((MainActivity)MainActivity.context_main).al_log;
 
-        for(int i =0; i<al_log.size(); i++){
-            allog.add(al_log.get(i));
+        if(al_log.size() == 0){
+            allog.add("보여줄 로그가 없습니다.");
         }
+        else {
+            if(al_log.size() > 50){
+                for(int i = al_log.size() -51; i >= 0; i --){
+                    al_log.remove(i);
+                }
+            }
+
+            for (int i = al_log.size() - 1; i >= 0; i--) {
+                allog.add(al_log.get(i));
+            }
+        }
+
 
         listView.setAdapter(adpater);
         listView.bringToFront();
