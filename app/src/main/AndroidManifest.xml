@@ -35,9 +35,6 @@
             android:name=".Setting_AlarmActivity"
             android:exported="false"/>
         <activity
-            android:name=".LogActivity"
-            android:exported="false" />
-        <activity
             android:name=".MessageActivity"
             android:exported="false" />
         <activity

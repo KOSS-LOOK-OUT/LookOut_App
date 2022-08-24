@@ -73,6 +73,16 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         listView.setAdapter(adpater);
 
         resetButton = findViewById(R.id.resetButton);
-
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                allog.clear();
+                al_log.clear();
+                if(al_log.size() == 0){
+                    allog.add("보여줄 로그가 없습니다.");
+                }
+                adpater.notifyDataSetChanged();
+            }
+        });
     }//end of onCreate
 }//end of class
