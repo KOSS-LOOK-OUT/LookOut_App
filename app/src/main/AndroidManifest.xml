@@ -18,12 +18,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher_lookout2"
+        android:icon="@mipmap/ic_launcher_lookout_finalfinal"
         android:label="LookOut"
-        android:roundIcon="@mipmap/ic_launcher_lookout2_round"
+        android:roundIcon="@mipmap/ic_launcher_lookout_finalfinal_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Look_Out"
         tools:targetApi="31">
+        <activity
+            android:name=".Setting_DeviceActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".Setting_AlarmActivity"
+            android:exported="false"/>
         <activity
             android:name=".LogActivity"
             android:exported="false" />

@@ -25,7 +25,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Setting_DeviceActivity.this, MainActivity.class);
+                Intent intent = new Intent(Setting_DeviceActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });

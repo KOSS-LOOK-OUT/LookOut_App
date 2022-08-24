@@ -52,6 +52,15 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        settingdevice = findViewById(R.id.settingdevice);
+        settingdevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this, Setting_DeviceActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
