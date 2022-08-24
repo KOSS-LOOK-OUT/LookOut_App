@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             String getTime = dateFormat.format(date);
             return getTime;
         }
-    }
+    
 
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
