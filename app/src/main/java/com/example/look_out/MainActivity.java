@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private final int MY_PERMISSIONS_REQUEST = 1000;
     private ImageView iconCircle;
     String value;
-    List<String> al_log = new ArrayList<>();
-    String shared = "file";
-    String allog;
+    ArrayList<String> al_log = new ArrayList<>();
+
+    private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         context_main = this;
 
-        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-        allog = sharedPreferences.getString("allog", "");
-        al_log.add(allog);
+        al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("device_1/content");
@@ -69,29 +71,20 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(value);
                 if ("불이야".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                    allog = getTime() + " 불이야";
-                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("allog", allog);
-                    editor.commit();
+                    al_log.add(getTime() + " 불이야");
+                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                     startActivity(intent);
 
                 } else if ("도둑이야".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                    allog = getTime() + " 도둑이야";
-                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("allog", allog);
-                    editor.commit();
+                    al_log.add(getTime() + " 도둑이야");
+                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                     startActivity(intent);
 
                 } else if ("조심해".equals(value)) {
                     Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                    allog = getTime() + " 조심해";
-                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("allog", allog);
-                    editor.commit();
+                    al_log.add(getTime() + " 조심해");
+                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                     startActivity(intent);
                 }
             }
@@ -177,4 +170,46 @@ public class MainActivity extends AppCompatActivity {
             return getTime;
         }
     }
+
+    private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        JSONArray a = new JSONArray();
+
+        for (int i = 0; i < values.size(); i++) {
+            a.put(values.get(i));
+        }
+
+        if (!values.isEmpty()) {
+            editor.putString(key, a.toString());
+        } else {
+            editor.putString(key, null);
+        }
+
+        editor.apply();
+    }
+
+    private ArrayList getStringArrayPref(Context context, String key) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String json = prefs.getString(key, null);
+        ArrayList urls = new ArrayList();
+
+        if (json != null) {
+            try {
+                JSONArray a = new JSONArray(json);
+
+                for (int i = 0; i < a.length(); i++) {
+                    String url = a.optString(i);
+                    urls.add(url);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return urls;
+    }
+
+}
 
