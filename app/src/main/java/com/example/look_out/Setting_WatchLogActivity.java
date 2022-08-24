@@ -84,6 +84,5 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 adpater.notifyDataSetChanged();
             }
         });
-        
     }//end of onCreate
 }//end of class
