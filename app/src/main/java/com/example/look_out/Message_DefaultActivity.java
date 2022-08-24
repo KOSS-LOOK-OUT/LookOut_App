@@ -16,9 +16,10 @@ import android.widget.Toast;
 public class Message_DefaultActivity extends AppCompatActivity {
 
     public static Context context_main;
-    private ImageView home;
+//    private ImageView home;
+    private ImageView backButton;
     private Button saveButton;
-    private Button cancelButton;
+//    private Button cancelButton;
     private Button resetButton;
     String message = "default";
     EditText et_setting;
@@ -39,19 +40,10 @@ public class Message_DefaultActivity extends AppCompatActivity {
 
         context_main = this;
 
-        home = findViewById(R.id.home);
-        home.setOnClickListener(new View.OnClickListener() {
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Message_DefaultActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        cancelButton = findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(Message_DefaultActivity.this, SettingActivity.class);
                 startActivity(intent);
             }

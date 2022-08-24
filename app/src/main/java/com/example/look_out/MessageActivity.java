@@ -45,6 +45,7 @@ public class MessageActivity extends AppCompatActivity {
         et_default = (EditText)findViewById(R.id.et_default);
         et_default.setHint(phoneNo + "에 전송할 문자를 입력해주세요.");
         et_default.setText(message);
+        et_default.bringToFront();
 
         tv = (TextView) findViewById(R.id.tv);
         tv.setText(phoneNo +  " 문자 전송");
@@ -79,4 +80,5 @@ public class MessageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }
