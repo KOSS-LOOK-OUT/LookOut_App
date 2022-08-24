@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 
 public class Setting_DeviceActivity extends AppCompatActivity {
     private ImageView backButton;
+    private Button addButton;
+    private Button deleteButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,17 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        addButton = findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Setting_DeviceActivity.this, Setting_AddDeviceActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        deleteButton = findViewById(R.id.deleteButton);
 
     }//end of onCreate
 
