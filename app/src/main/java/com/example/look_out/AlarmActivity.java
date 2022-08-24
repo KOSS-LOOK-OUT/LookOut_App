@@ -45,7 +45,7 @@ public class AlarmActivity extends AppCompatActivity {
         textView.setText("\"" + value + "\" 소리가\n 감지되었습니다!");
 
         try {
-            sound = ((SettingActivity) SettingActivity.context_main).sound;
+            sound = ((Setting_AlarmActivity) Setting_AlarmActivity.context_main).sound;
         } catch (Exception e) {
             sound = false;
         }
@@ -61,7 +61,8 @@ public class AlarmActivity extends AppCompatActivity {
             public void onClick(View view) {
                 vibrator.cancel();
                 String phoneNo = "119";
-
+                if("도둑이야".equals(value)){ phoneNo = "112";}
+                
                 Context c = view.getContext();
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNo));
 
