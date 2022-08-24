@@ -71,10 +71,12 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 al_log.remove(i);
             }
         }
+
+        allog.clear();
         for (int i = al_log.size() - 1; i >= 0; i--) {
             allog.add(al_log.get(i));
         }
-        
+
         resetButton = findViewById(R.id.resetButton);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
