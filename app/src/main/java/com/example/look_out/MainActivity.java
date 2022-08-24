@@ -14,6 +14,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -124,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent); //엑티비티 이동
             }
         });
+
+        iconCircle = (ImageView)findViewById(R.id.iconCircle);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim);
+        iconCircle.setAnimation(animation);
     }
 
         public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
