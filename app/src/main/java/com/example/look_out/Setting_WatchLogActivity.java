@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +30,18 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
     private ImageView backButton;
     private ListView listView;
     private Button resetButton;
-    List<String> al_log = new ArrayList<>();
-    List<String> allog = new ArrayList<>();
+    private TextView status;
+    ArrayList<String> al_log = new ArrayList<>();
+    ArrayList<String> allog = new ArrayList<>();
+
+    private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_log);
+
+        allog = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -56,21 +65,17 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         };
         al_log = ((MainActivity)MainActivity.context_main).al_log;
 
-        if(al_log.size() == 0){
-            allog.add("보여줄 로그가 없습니다.");
-        }
-        else {
-            if(al_log.size() > 50){
-                for(int i = al_log.size() -51; i >= 0; i --){
-                    al_log.remove(i);
-                }
-            }
 
-            for (int i = al_log.size() - 1; i >= 0; i--) {
-                allog.add(al_log.get(i));
+        if(al_log.size() > 50) {
+            for (int i = al_log.size() - 51; i >= 0; i--) {
+                al_log.remove(i);
             }
         }
-        listView.setAdapter(adpater);
+
+        allog.clear();
+        for (int i = al_log.size() - 1; i >= 0; i--) {
+            allog.add(al_log.get(i));
+        }
 
         resetButton = findViewById(R.id.resetButton);
         resetButton.setOnClickListener(new View.OnClickListener() {
@@ -78,11 +83,60 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
             public void onClick(View view) {
                 allog.clear();
                 al_log.clear();
-                if(al_log.size() == 0){
-                    allog.add("보여줄 로그가 없습니다.");
+                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, allog);
+                if(al_log.size() == 0 && allog.size() == 0){
+                    status = (TextView)findViewById(R.id.status);
+                    status.setText("보여줄 로그가 없습니다.");
                 }
                 adpater.notifyDataSetChanged();
             }
         });
+
+        if(al_log.size() == 0 && allog.size() == 0){
+            status = (TextView)findViewById(R.id.status);
+            status.setText("보여줄 로그가 없습니다.");
+        }
+
+        listView.setAdapter(adpater);
     }//end of onCreate
+
+    private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        JSONArray a = new JSONArray();
+
+        for (int i = 0; i < values.size(); i++) {
+            a.put(values.get(i));
+        }
+
+        if (!values.isEmpty()) {
+            editor.putString(key, a.toString());
+        } else {
+            editor.putString(key, null);
+        }
+
+        editor.apply();
+    }
+
+    private ArrayList getStringArrayPref(Context context, String key) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String json = prefs.getString(key, null);
+        ArrayList urls = new ArrayList();
+
+        if (json != null) {
+            try {
+                JSONArray a = new JSONArray(json);
+
+                for (int i = 0; i < a.length(); i++) {
+                    String url = a.optString(i);
+                    urls.add(url);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return urls;
+    }
 }//end of class
