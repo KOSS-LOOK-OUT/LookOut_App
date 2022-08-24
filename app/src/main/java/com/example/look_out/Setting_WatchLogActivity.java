@@ -78,7 +78,7 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
             public void onClick(View view) {
                 allog.clear();
                 al_log.clear();
-                if(al_log.size() == 0){
+                if(al_log.size() == 0 && allog.size() == 0){
                     allog.add("보여줄 로그가 없습니다.");
                 }
                 adpater.notifyDataSetChanged();
