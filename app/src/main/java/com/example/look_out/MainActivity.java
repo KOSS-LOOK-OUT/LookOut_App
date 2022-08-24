@@ -106,17 +106,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        int permissionCall = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
-        int permissionSMS = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        int permissionCall = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
+        int permissionSMS = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS);
 
         if (permissionCall == PackageManager.PERMISSION_DENIED || permissionSMS == PackageManager.PERMISSION_DENIED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE) || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
-                Toast.makeText(this, "전화&문자 권한이 필요합니다.", Toast.LENGTH_LONG).show();
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST);
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.CALL_PHONE)|| ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.SEND_SMS)) {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST);
             } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST);
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST);
+
             }
         }
+
+
 
         setting = findViewById(R.id.setting);
         setting.setOnClickListener(new View.OnClickListener() {
@@ -132,22 +134,13 @@ public class MainActivity extends AppCompatActivity {
         iconCircle.setAnimation(animation);
     }
 
-        public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-            if (requestCode == 1000) {
-                boolean check_result = true;
-                // 모든 퍼미션을 허용했는지 체크
-                for (int result : grantResults) {
-                    if (result != PackageManager.PERMISSION_GRANTED) {
-                        check_result = false;
-                        break;
-                    }
-                }
-                // 권한 체크에 동의를 하지 않으면 안드로이드 종료
-                if (check_result == true) {
-                    Toast.makeText(this, "앱 실행을 위한 권한이 설정 되었습니다", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(this, "앱 실행을 위한 권한이 취소 되었습니다", Toast.LENGTH_LONG).show();
-                    finish();
+        public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+            boolean check_result = true;
+            //모든 퍼미션을 허용했는지 체크
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    check_result = false;
+                    break;
                 }
             }
         }
