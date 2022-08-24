@@ -30,7 +30,7 @@ public class LogActivity extends AppCompatActivity {
         ArrayAdapter<String> adpater = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allog);
         al_log = ((MainActivity)MainActivity.context_main).al_log;
 
-        for(int i =0; i<al_log.size(); i++){
+        for(int i = al_log.size() - 1; i>0; i--){
             allog.add(al_log.get(i));
         }
 
