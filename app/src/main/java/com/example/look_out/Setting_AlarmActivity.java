@@ -45,7 +45,16 @@ public class Setting_AlarmActivity extends AppCompatActivity {
         sound = sharedPreferences.getBoolean("switch", false);
         Sound.setChecked(sound);
 
+        vibrationinform = (TextView) findViewById(R.id.vibrationinform);
+        if(Sound.isChecked()){
+            vibrationinform.setText("무음모드에서도 진동이 울립니다.");
+        } else {
+            vibrationinform.setText("무음모드에서는 진동이 울리지 않습니다.");
+        }
+
         Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
