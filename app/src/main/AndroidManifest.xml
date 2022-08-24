@@ -24,6 +24,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Look_Out"
         tools:targetApi="31">
+
+        <activity
+            android:name=".Setting_WatchLogActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Setting_DeviceActivity"
             android:exported="false"/>

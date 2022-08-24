@@ -19,6 +19,7 @@ public class SettingActivity extends AppCompatActivity {
     private ImageButton messagedefault;
     private ImageButton settingalarm;
     private ImageButton settingdevice;
+    private ImageButton watchlog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,16 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        watchlog = findViewById(R.id.watchlog);
+        watchlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this, Setting_DeviceActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
