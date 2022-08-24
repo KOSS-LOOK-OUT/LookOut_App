@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Setting_AlarmActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class Setting_AlarmActivity extends AppCompatActivity {
     Boolean sound;
     public static Context context_main;
     private ImageView backButton;
+    private TextView vibrationinform;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,13 @@ public class Setting_AlarmActivity extends AppCompatActivity {
                 editor.commit();
 
                 if(isChecked){
+                    vibrationinform = (TextView)findViewById(R.id.vibrationinform);
+                    vibrationinform.setText("무음모드에서도 진동이 울립니다.");
                     //토스트 메시지(무음모드인 경우에도 진동이 울립니다.)
                     Toast.makeText(Setting_AlarmActivity.this, "무음모드인 경우에도 진동이 울립니다.", Toast.LENGTH_SHORT).show();
                 } else{
+                    vibrationinform = (TextView)findViewById(R.id.vibrationinform);
+                    vibrationinform.setText("무음모드에서는 진동이 울리지 않습니다.");
                     //토스트 메시지(무음모드인 경우 진동이 울리지 않습니다.)
                     Toast.makeText(Setting_AlarmActivity.this, "무음모드인 경우 진동이 울리지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
