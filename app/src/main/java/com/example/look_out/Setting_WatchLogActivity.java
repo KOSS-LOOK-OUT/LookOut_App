@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import java.util.List;
 public class Setting_WatchLogActivity extends AppCompatActivity {
     private ImageView backButton;
     private ListView listView;
+    private Button resetButton;
     List<String> al_log = new ArrayList<>();
     List<String> allog = new ArrayList<>();
 
@@ -68,9 +70,9 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 allog.add(al_log.get(i));
             }
         }
-
-
         listView.setAdapter(adpater);
-        listView.bringToFront();
+
+        resetButton = findViewById(R.id.resetButton);
+        
     }//end of onCreate
 }//end of class

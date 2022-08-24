@@ -59,12 +59,12 @@
 
     <Button
         android:id="@+id/resetButton"
-        android:layout_width="75dp"
+        android:layout_width="80dp"
         android:layout_height="35dp"
         android:background="@drawable/border_whitebutton"
         android:text="초기화"
         android:textColor="@color/black"
-        android:textSize="13dp"
+        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.952"
