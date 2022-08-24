@@ -28,7 +28,7 @@
         android:id="@+id/siren"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/figma_siren"
+        android:src="@drawable/siren_gohwajil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
