@@ -48,6 +48,7 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         }
 
         listView.setAdapter(adpater);
+        listView.bringToFront();
     }//end of onCreate
 
 }//end of class
