@@ -66,7 +66,7 @@ public class SettingActivity extends AppCompatActivity {
         watchlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, Setting_DeviceActivity.class);
+                Intent intent = new Intent(SettingActivity.this, Setting_WatchLogActivity.class);
                 startActivity(intent);
             }
         });
