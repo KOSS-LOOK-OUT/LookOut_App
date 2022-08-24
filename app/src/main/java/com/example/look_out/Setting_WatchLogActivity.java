@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -40,7 +43,15 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
-        ArrayAdapter<String> adpater = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allog);
+        ArrayAdapter<String> adpater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                View view = super.getView(position, convertView, parent);
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                tv.setTextColor(Color.rgb(230,230,230));
+                return view;
+            }
+        };
         al_log = ((MainActivity)MainActivity.context_main).al_log;
 
         for(int i =0; i<al_log.size(); i++){
@@ -50,5 +61,4 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         listView.setAdapter(adpater);
         listView.bringToFront();
     }//end of onCreate
-
 }//end of class
