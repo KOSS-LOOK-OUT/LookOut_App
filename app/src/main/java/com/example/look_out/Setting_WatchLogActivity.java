@@ -73,6 +73,6 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         listView.setAdapter(adpater);
 
         resetButton = findViewById(R.id.resetButton);
-        
+
     }//end of onCreate
 }//end of class
