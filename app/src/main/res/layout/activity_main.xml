@@ -53,7 +53,7 @@
         android:id="@+id/setting"
         android:layout_width="35dp"
         android:layout_height="39dp"
-        android:src="@drawable/settingicon"
+        android:src="@drawable/setting_gohwajil"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
