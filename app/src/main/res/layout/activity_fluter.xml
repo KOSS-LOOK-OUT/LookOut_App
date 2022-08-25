@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="75dp"
         android:layout_height="170dp"
-        android:src="@drawable/group22"
+        android:src="@drawable/icon_embo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
