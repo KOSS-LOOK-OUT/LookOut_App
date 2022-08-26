@@ -75,7 +75,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
-        ArrayAdapter<String> adpater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, savedevice){
+        ArrayAdapter<String> adpater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, savedevice){
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 View view = super.getView(position, convertView, parent);
