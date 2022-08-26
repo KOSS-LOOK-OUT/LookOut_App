@@ -66,10 +66,9 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                 if (device_key.contains(key)) {
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference ref = database.getReference(key + "/state");
-                    DatabaseReference ref2 = database.getReference(key + "/id");
                     ref.setValue(true);
                     Toast.makeText(getApplicationContext(), "디바이스 추가에 성공 했습니다!", Toast.LENGTH_LONG).show();
-                    save_device.add("디바이스 키 : " + key + " state : true");
+                    save_device.add(key);
                     setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
                 }
                 else{

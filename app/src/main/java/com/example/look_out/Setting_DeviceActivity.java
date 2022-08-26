@@ -1,7 +1,5 @@
 package com.example.look_out;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,21 +8,15 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,9 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 public class Setting_DeviceActivity extends AppCompatActivity {
     private ImageView backButton;
@@ -44,7 +33,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     ArrayList<String> save_device = new ArrayList<>();
     ArrayList<String> savedevice = new ArrayList<>();
 
-    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
+    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +41,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting_device);
         save_device.clear();
 
-
-        save_device = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
+        save_device = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -94,15 +82,36 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         savedevice.clear();
         for(int i = 0; i < save_device.size(); i++){
             if(!savedevice.contains(save_device.get(i))){
-                savedevice.add(save_device.get(i));
+                savedevice.add("디바이스 키 : " + save_device.get(i) + "state : true");
             }
         }
 
-        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, savedevice);
+        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
         listView.setAdapter(adpater);
 
 
         deleteButton = findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+                int count = adpater.getCount() ;
+
+                for (int i = count-1; i >= 0; i--) {
+                    if (checkedItems.get(i)) {
+                        savedevice.remove(i);
+                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference ref = database.getReference(save_device.get(i) + "/state");
+                        ref.setValue(false);
+                        save_device.remove(i);
+                    }
+                }
+                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
+                // 모든 선택 상태 초기화.
+                listView.clearChoices() ;
+
+                adpater.notifyDataSetChanged();
+            }
+        }) ;
 
     }//end of onCreate
 
