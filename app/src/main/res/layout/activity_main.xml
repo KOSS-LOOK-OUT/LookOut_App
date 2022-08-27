@@ -28,7 +28,7 @@
         android:id="@+id/iconCircle"
         android:layout_width="195dp"
         android:layout_height="195dp"
-        android:src="@drawable/group22"
+        android:src="@drawable/icon_ipche"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
