@@ -19,6 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -26,7 +27,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +34,6 @@ import org.json.JSONException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static Context context_main;
@@ -43,11 +42,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
     private ImageView iconCircle;
+    private TextView statusMessage;
     String value;
+    ArrayList<String> device_key = new ArrayList<>();
     ArrayList<String> al_log = new ArrayList<>();
+    ArrayList<String> save_device = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
-
+    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +57,50 @@ public class MainActivity extends AppCompatActivity {
 
         context_main = this;
 
+        //일단.. 디바이스가 들어있는 리스트를 가져오긴 했어
+        try{
+            save_device = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
         al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("device_1/content");
+        DatabaseReference ref2 = database.getReference();
+
+
+        ref2.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                device_key.add(snapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                device_key.add(snapshot.getKey());
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                value = dataSnapshot.getValue(String.class);
-                System.out.println("childadded:" + value);
             }
 
             @Override
@@ -129,10 +165,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        statusMessage = (TextView) findViewById(R.id.statusMessage);
+        if(save_device.isEmpty()){
+            statusMessage.setText("연결된 디바이스가 없습니다.");
+        } else{
+            statusMessage.setText("위험한 소리를 감지하고 있습니다..");
+        }
+    }//end of onCreate
+
         iconCircle = (ImageView)findViewById(R.id.iconCircle);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim);
         iconCircle.setAnimation(animation);
     }
+
 
         public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
             boolean check_result = true;
@@ -144,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
 
         //뒤로가기 두 번 눌러서 종료하기
         public void onBackPressed () {
@@ -209,6 +253,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return urls;
     }
-
-}
+}//end of class
 

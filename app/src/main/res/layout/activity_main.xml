@@ -37,9 +37,9 @@
         app:layout_constraintVertical_bias="0.391" />
 
     <TextView
+        android:id="@+id/statusMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="위험한 소리를 감지하고 있습니다."
         android:textColor="#70737B"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
