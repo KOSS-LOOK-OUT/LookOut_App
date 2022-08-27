@@ -1,8 +1,10 @@
 package com.example.look_out;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,7 +35,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     private ListView listView;
     ArrayList<String> save_device = new ArrayList<>();
     ArrayList<String> savedevice = new ArrayList<>();
-
+    ArrayAdapter<String> adapter;
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
 
     @Override
@@ -63,7 +66,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
-        ArrayAdapter<String> adpater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, savedevice){
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, savedevice){
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 View view = super.getView(position, convertView, parent);
@@ -87,14 +90,44 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         }
 
         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
-        listView.setAdapter(adpater);
+        listView.setAdapter(adapter);
 
 
         deleteButton = findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                showDialog();
+//                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+//                int count = adapter.getCount() ;
+//
+//                for (int i = count-1; i >= 0; i--) {
+//                    if (checkedItems.get(i)) {
+//                        savedevice.remove(i);
+//                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                        DatabaseReference ref = database.getReference(save_device.get(i) + "/state");
+//                        ref.setValue(false);
+//                        save_device.remove(i);
+//                    }
+//                }
+//                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
+//                // 모든 선택 상태 초기화.
+//                listView.clearChoices() ;
+//
+//                adapter.notifyDataSetChanged();
+            }
+        }) ;
+
+    }//end of onCreate
+
+    public void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("확인").setMessage("선택한 디바이스를 삭제하시겠습니까?");
+        builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "확인 누름", Toast.LENGTH_SHORT).show();
                 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-                int count = adpater.getCount() ;
+                int count = adapter.getCount() ;
 
                 for (int i = count-1; i >= 0; i--) {
                     if (checkedItems.get(i)) {
@@ -109,11 +142,20 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 // 모든 선택 상태 초기화.
                 listView.clearChoices() ;
 
-                adpater.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
-        }) ;
+        });
 
-    }//end of onCreate
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"취소 누름", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }//end of OnClickHandler
 
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
