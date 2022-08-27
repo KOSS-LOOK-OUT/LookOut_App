@@ -63,7 +63,11 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 key = deviceAddEdit.getText().toString();
 
-                if (device_key.contains(key)) {
+                if(save_device.contains(key)) {
+                    Toast.makeText(getApplicationContext(), "이미 등록된 인증번호 입니다!", Toast.LENGTH_LONG).show();
+                    deviceAddEdit.setText("");
+                }
+                else if (device_key.contains(key)) {
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference ref = database.getReference(key + "/state");
                     ref.setValue(true);

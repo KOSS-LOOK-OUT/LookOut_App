@@ -84,9 +84,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
         savedevice.clear();
         for(int i = 0; i < save_device.size(); i++){
-            if(!savedevice.contains(save_device.get(i))){
-                savedevice.add("디바이스 키 : " + save_device.get(i) + ", state : true");
-            }
+            savedevice.add("디바이스 키 : " + save_device.get(i) + ", state : true");
         }
 
         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
