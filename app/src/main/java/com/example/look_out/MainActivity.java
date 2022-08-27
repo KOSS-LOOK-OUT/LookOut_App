@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -37,17 +38,27 @@ public class MainActivity extends AppCompatActivity {
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
     private ImageView iconCircle;
+    private TextView statusMessage;
     String value;
     ArrayList<String> device_key = new ArrayList<>();
     ArrayList<String> al_log = new ArrayList<>();
+    ArrayList<String> save_device = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
+    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         context_main = this;
+
+        //일단.. 디바이스가 들어있는 리스트를 가져오긴 했어
+        try{
+            save_device = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
         al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
@@ -147,7 +158,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent); //엑티비티 이동
             }
         });
-    }
+
+        statusMessage = (TextView) findViewById(R.id.statusMessage);
+        if(save_device.isEmpty()){
+            statusMessage.setText("연결된 디바이스가 없습니다.");
+        } else{
+            statusMessage.setText("위험한 소리를 감지하고 있습니다..");
+        }
+    }//end of onCreate
 
         public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
             if (requestCode == 1000) {
@@ -168,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
 
         //뒤로가기 두 번 눌러서 종료하기
         public void onBackPressed () {
@@ -233,6 +250,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return urls;
     }
-
-}
+}//end of class
 
