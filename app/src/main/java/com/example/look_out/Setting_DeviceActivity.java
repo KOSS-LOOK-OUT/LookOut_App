@@ -85,7 +85,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         savedevice.clear();
         for(int i = 0; i < save_device.size(); i++){
             if(!savedevice.contains(save_device.get(i))){
-                savedevice.add("디바이스 키 : " + save_device.get(i) + "state : true");
+                savedevice.add("디바이스 키 : " + save_device.get(i) + ", state : true");
             }
         }
 
@@ -95,25 +95,14 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
         deleteButton = findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new Button.OnClickListener() {
+
             public void onClick(View v) {
-                showDialog();
-//                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-//                int count = adapter.getCount() ;
-//
-//                for (int i = count-1; i >= 0; i--) {
-//                    if (checkedItems.get(i)) {
-//                        savedevice.remove(i);
-//                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                        DatabaseReference ref = database.getReference(save_device.get(i) + "/state");
-//                        ref.setValue(false);
-//                        save_device.remove(i);
-//                    }
-//                }
-//                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
-//                // 모든 선택 상태 초기화.
-//                listView.clearChoices() ;
-//
-//                adapter.notifyDataSetChanged();
+                SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
+                if(checkedItems.size() == 0){
+                    Toast.makeText(getApplicationContext(), "삭제 할 디바이스를 선택해주세요.",Toast.LENGTH_SHORT).show();
+                } else{
+                    showDialog();
+                }
             }
         }) ;
 
@@ -122,10 +111,18 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     public void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("확인").setMessage("선택한 디바이스를 삭제하시겠습니까?");
+
+
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
         builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "확인 누름", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                 int count = adapter.getCount() ;
 
@@ -143,13 +140,6 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 listView.clearChoices() ;
 
                 adapter.notifyDataSetChanged();
-            }
-        });
-
-        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),"취소 누름", Toast.LENGTH_SHORT).show();
             }
         });
 
