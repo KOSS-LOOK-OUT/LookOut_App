@@ -120,7 +120,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-                int count = adapter.getCount() ;
+                int count = adapter.getCount();
 
                 for (int i = count-1; i >= 0; i--) {
                     if (checkedItems.get(i)) {

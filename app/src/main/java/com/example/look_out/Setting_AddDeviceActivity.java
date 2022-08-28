@@ -76,8 +76,11 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "중복된 이름입니다!", Toast.LENGTH_SHORT).show();
                     deviceAddId.setText("");
                     deviceAddEdit.setText("");
-                }
-                else if (device_key.contains(key)) {
+                } else if(nickname.equals("")){
+                    Toast.makeText(getApplicationContext(), "디바이스 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    deviceAddId.setText("");
+                    deviceAddEdit.setText("");
+                } else if (device_key.contains(key)) {
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference ref = database.getReference(key);
                     ref.child("/state").setValue(true);
