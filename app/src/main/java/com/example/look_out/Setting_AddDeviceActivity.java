@@ -1,5 +1,7 @@
 package com.example.look_out;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -14,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,8 +35,7 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
     public static Context context_main;
     String key;
     ArrayList<String> device_key = new ArrayList<>();
-    ArrayList<String> save_device = new ArrayList<>();
-    ArrayList<String> savedevice = new ArrayList<>();
+    ArrayList<String> device_uuid = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
 
@@ -42,7 +46,7 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
 
         context_main = this;
 
-        save_device = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
 
         device_key = ((MainActivity)MainActivity.context_main).device_key;
 
@@ -63,17 +67,41 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
             public void onClick(View view) {
                 key = deviceAddEdit.getText().toString();
 
-                if(save_device.contains(key)) {
-                    Toast.makeText(getApplicationContext(), "이미 등록된 인증번호 입니다!", Toast.LENGTH_LONG).show();
-                    deviceAddEdit.setText("");
-                }
-                else if (device_key.contains(key)) {
+                if (device_key.contains(key)) {
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference ref = database.getReference(key + "/state");
-                    ref.setValue(true);
+                    DatabaseReference ref = database.getReference(key);
+                    ref.child("/state").setValue(true);
                     Toast.makeText(getApplicationContext(), "디바이스 추가에 성공 했습니다!", Toast.LENGTH_LONG).show();
-                    save_device.add(key);
-                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
+
+                    ref.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            if(!snapshot.getValue().toString().equals("true")){
+                                device_uuid.add(snapshot.getValue().toString());
+                            }
+                            System.out.println(device_uuid);
+                            setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     deviceAddEdit.setText("");
                 }
                 else{
@@ -81,16 +109,14 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                     key = "";
                     deviceAddEdit.setText("");
                 }
-
             }
         });
-
     }//end of onCreate
 
     @Override
     public void onBackPressed(){
         super.onBackPressed();
-        Intent intent = new Intent(Setting_AddDeviceActivity.this, Setting_DeviceActivity.class);
+        Intent intent = new Intent(Setting_AddDeviceActivity.this, SettingActivity.class);
         startActivity(intent);
     }
 

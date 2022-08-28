@@ -33,18 +33,22 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     private Button addButton;
     private Button deleteButton;
     private ListView listView;
-    ArrayList<String> save_device = new ArrayList<>();
     ArrayList<String> savedevice = new ArrayList<>();
+    ArrayList<String> device_uuid = new ArrayList<>();
     ArrayAdapter<String> adapter;
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
+    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_device);
-        save_device.clear();
 
-        save_device = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        try {
+            device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        }catch(Exception e){
+
+        }
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -76,18 +80,10 @@ public class Setting_DeviceActivity extends AppCompatActivity {
             }
         };
 
-        try {
-            save_device = ((Setting_AddDeviceActivity) Setting_AddDeviceActivity.context_main).save_device;
-        }
-        catch(Exception e){
-        }
-
         savedevice.clear();
-        for(int i = 0; i < save_device.size(); i++){
-            savedevice.add("디바이스 키 : " + save_device.get(i) + ", state : true");
+        for(int i = 0; i < device_uuid.size(); i++){
+            savedevice.add("디바이스 키 : " + device_uuid.get(i) + ", state : true");
         }
-
-        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
         listView.setAdapter(adapter);
 
 
@@ -105,13 +101,6 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         }) ;
 
     }//end of onCreate
-
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        Intent intent = new Intent(Setting_DeviceActivity.this, SettingActivity.class);
-        startActivity(intent);
-    }
 
     public void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -135,12 +124,13 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                     if (checkedItems.get(i)) {
                         savedevice.remove(i);
                         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference ref = database.getReference(save_device.get(i) + "/state");
+                        DatabaseReference ref = database.getReference( device_uuid.get(i)+"/state");
                         ref.setValue(false);
-                        save_device.remove(i);
+                        device_uuid.remove(i);
                     }
                 }
-                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, save_device);
+
+                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_uuid);
                 // 모든 선택 상태 초기화.
                 listView.clearChoices() ;
 
@@ -151,6 +141,13 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }//end of OnClickHandler
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(Setting_DeviceActivity.this, SettingActivity.class);
+        startActivity(intent);
+    }
 
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
