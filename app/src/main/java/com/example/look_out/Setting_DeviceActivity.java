@@ -140,7 +140,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }//end of OnClickHandler
+    }//end of removeDeviceDialog
 
     @Override
     public void onBackPressed(){
