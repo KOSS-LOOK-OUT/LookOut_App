@@ -18,9 +18,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher_lookout_finalfinal"
+        android:icon="@mipmap/ic_launcher_lookout_white"
         android:label="LookOut"
-        android:roundIcon="@mipmap/ic_launcher_lookout_finalfinal_round"
+        android:roundIcon="@mipmap/ic_launcher_lookout_white_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Look_Out"
         tools:targetApi="31">
