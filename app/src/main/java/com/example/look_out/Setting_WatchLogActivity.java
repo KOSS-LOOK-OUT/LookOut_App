@@ -46,8 +46,6 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
-        al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
-
         ArrayAdapter<String> adpater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
