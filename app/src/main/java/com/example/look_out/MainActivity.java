@@ -16,8 +16,6 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
         al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
+        if(al_log.size() > 50) {
+            for (int i = al_log.size() - 51; i >= 0; i--) {
+                al_log.remove(i);
+            }
+            setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+        }
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
 
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
                     value = dataSnapshot.getValue(String.class);
-                    System.out.println(value);
+
                     if ("불이야".equals(value)) {
                         Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                         al_log.add(getTime() + " 불이야");

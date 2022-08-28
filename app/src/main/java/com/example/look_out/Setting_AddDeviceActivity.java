@@ -88,9 +88,8 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                         public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                             if(!snapshot.getValue().toString().equals("true")){
                                 device_uuid.add(snapshot.getValue().toString());
+                                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
                             }
-                            System.out.println(device_uuid);
-                            setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
                         }
 
                         @Override

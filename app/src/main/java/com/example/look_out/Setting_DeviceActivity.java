@@ -118,16 +118,12 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         builder.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                 int count = adapter.getCount() ;
 
                 for (int i = count-1; i >= 0; i--) {
                     if (checkedItems.get(i)) {
                         savedevice.remove(i);
-                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference ref = database.getReference( device_uuid.get(i)+"/content/delete_state");
-                        ref.setValue(false);
                         device_uuid.remove(i);
                         device_nickname.remove(i);
                     }
@@ -139,6 +135,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 listView.clearChoices() ;
 
                 adapter.notifyDataSetChanged();
+
+                Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 

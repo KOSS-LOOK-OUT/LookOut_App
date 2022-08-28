@@ -12,19 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Setting_WatchLogActivity extends AppCompatActivity {
     private ImageView backButton;
@@ -41,8 +35,6 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_log);
 
-        allog = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
-
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +46,8 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
+        al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
+
         ArrayAdapter<String> adpater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
@@ -63,18 +57,19 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 return view;
             }
         };
-        al_log = ((MainActivity)MainActivity.context_main).al_log;
+        al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
+        status = (TextView)findViewById(R.id.status);
 
-        if(al_log.size() > 50) {
-            for (int i = al_log.size() - 51; i >= 0; i--) {
-                al_log.remove(i);
-            }
+        if(al_log.size() == 0){
+            status.setText("보여줄 로그가 없습니다.");
         }
-
-        allog.clear();
-        for (int i = al_log.size() - 1; i >= 0; i--) {
-            allog.add(al_log.get(i));
+        else{
+            allog.clear();
+            for (int i = al_log.size() - 1; i >= 0; i--) {
+                allog.add(al_log.get(i));
+            }
+            listView.setAdapter(adpater);
         }
 
         resetButton = findViewById(R.id.resetButton);
@@ -83,21 +78,13 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
             public void onClick(View view) {
                 allog.clear();
                 al_log.clear();
-                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, allog);
-                if(al_log.size() == 0 && allog.size() == 0){
-                    status = (TextView)findViewById(R.id.status);
-                    status.setText("보여줄 로그가 없습니다.");
-                }
+
+                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+                status.setText("보여줄 로그가 없습니다.");
+
                 adpater.notifyDataSetChanged();
             }
         });
-
-        if(al_log.size() == 0 && allog.size() == 0){
-            status = (TextView)findViewById(R.id.status);
-            status.setText("보여줄 로그가 없습니다.");
-        }
-
-        listView.setAdapter(adpater);
     }//end of onCreate
 
     @Override
