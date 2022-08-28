@@ -120,8 +120,8 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "인증번호를 다시 확인해 주세요.", Toast.LENGTH_LONG).show();
-                    key = "";
                     deviceAddEdit.setText("");
+                    deviceAddId.setText("");
                 }
             }
         });
