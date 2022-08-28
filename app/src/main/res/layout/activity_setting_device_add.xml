@@ -70,6 +70,7 @@
         android:background="@drawable/border_whitebutton"
         android:text="추가"
         android:textSize="11dp"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.772"
