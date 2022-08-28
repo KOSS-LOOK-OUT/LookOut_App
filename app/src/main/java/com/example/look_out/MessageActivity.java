@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,6 +69,10 @@ public class MessageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public boolean onKeyDown(int keycode, KeyEvent event) {
+        return true;
     }
 
     private void sendSMS(String phoneNumber, String message_119) {

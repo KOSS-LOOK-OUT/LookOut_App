@@ -16,10 +16,8 @@ import android.widget.Toast;
 public class Message_DefaultActivity extends AppCompatActivity {
 
     public static Context context_main;
-//    private ImageView home;
     private ImageView backButton;
     private Button saveButton;
-//    private Button cancelButton;
     private Button resetButton;
     String message = "default";
     EditText et_setting;
@@ -71,6 +69,12 @@ public class Message_DefaultActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(Message_DefaultActivity.this, SettingActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -100,6 +100,13 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         listView.setAdapter(adpater);
     }//end of onCreate
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(Setting_WatchLogActivity.this, SettingActivity.class);
+        startActivity(intent);
+    }
+
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

@@ -106,6 +106,13 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
     }//end of onCreate
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(Setting_DeviceActivity.this, SettingActivity.class);
+        startActivity(intent);
+    }
+
     public void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("확인").setMessage("선택한 디바이스를 삭제하시겠습니까?");

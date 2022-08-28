@@ -87,6 +87,13 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
 
     }//end of onCreate
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(Setting_AddDeviceActivity.this, Setting_DeviceActivity.class);
+        startActivity(intent);
+    }
+
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

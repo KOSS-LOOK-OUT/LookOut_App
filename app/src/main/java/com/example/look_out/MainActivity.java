@@ -175,10 +175,6 @@ public class MainActivity extends AppCompatActivity {
             iconCircle.setAnimation(animation);
             statusMessage.setText("위험한 소리를 감지하고 있습니다..");
         }
-
-
-
-
     }//end of onCreate
 
         public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -217,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
     
 
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
-
+        
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         JSONArray a = new JSONArray();

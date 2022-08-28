@@ -70,9 +70,12 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }//end of onCreate
 
-
-
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+        startActivity(intent);
     }
-
-}
+}//end of class
