@@ -119,7 +119,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-                int count = adapter.getCount() ;
+                int count = adapter.getCount();
 
                 for (int i = count-1; i >= 0; i--) {
                     if (checkedItems.get(i)) {
