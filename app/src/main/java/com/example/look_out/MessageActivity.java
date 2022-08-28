@@ -1,10 +1,13 @@
 package com.example.look_out;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.SparseBooleanArray;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -65,11 +68,32 @@ public class MessageActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MessageActivity.this, MainActivity.class);
+                goMainDialog();
+            }
+        });
+    }//end of onCreate
+
+    public void goMainDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("확인").setMessage("메인 화면으로 돌아가시겠습니까?");
+
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.setPositiveButton("돌아가기", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
-    }
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }//end of OnClickHandler
 
     public boolean onKeyDown(int keycode, KeyEvent event) {
         return true;
