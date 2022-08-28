@@ -35,6 +35,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     private ListView listView;
     ArrayList<String> savedevice = new ArrayList<>();
     ArrayList<String> device_uuid = new ArrayList<>();
+    ArrayList<String> device_nickname = new ArrayList<>();
     ArrayAdapter<String> adapter;
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
     private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
@@ -46,6 +47,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
         try {
             device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+            device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
         }catch(Exception e){
 
         }
@@ -81,8 +83,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         };
 
         savedevice.clear();
-        for(int i = 0; i < device_uuid.size(); i++){
-            savedevice.add("디바이스 키 : " + device_uuid.get(i) + ", state : true");
+        for(int i = 0; i < device_nickname.size(); i++){
+            savedevice.add("디바이스 이름: " + device_nickname.get(i) + ", state : true");
         }
         listView.setAdapter(adapter);
 
@@ -127,10 +129,12 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                         DatabaseReference ref = database.getReference( device_uuid.get(i)+"/state");
                         ref.setValue(false);
                         device_uuid.remove(i);
+                        device_nickname.remove(i);
                     }
                 }
 
-                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_uuid);
+                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
+                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_nickname);
                 // 모든 선택 상태 초기화.
                 listView.clearChoices() ;
 

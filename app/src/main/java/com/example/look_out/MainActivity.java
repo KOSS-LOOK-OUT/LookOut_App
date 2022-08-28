@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
     String value;
     ArrayList<String> device_key = new ArrayList<>();
     ArrayList<String> al_log = new ArrayList<>();
-    ArrayList<String> save_device = new ArrayList<>();
+    ArrayList<String> device_nickname = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
-    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
+    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         context_main = this;
 
-        //일단.. 디바이스가 들어있는 리스트를 가져오긴 했어
         try{
-            save_device = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+            device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -169,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim);
 
         statusMessage = (TextView) findViewById(R.id.statusMessage);
-        if(save_device.isEmpty()){
+        if(device_nickname.isEmpty()){
             statusMessage.setText("연결된 디바이스가 없습니다.");
         } else{
             iconCircle.setAnimation(animation);
