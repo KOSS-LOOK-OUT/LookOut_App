@@ -49,7 +49,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
             device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
             device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
         }catch(Exception e){
-
+            e.printStackTrace();
         }
 
         backButton = findViewById(R.id.backButton);
@@ -84,7 +84,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
         savedevice.clear();
         for(int i = 0; i < device_nickname.size(); i++){
-            savedevice.add("디바이스 이름: " + device_nickname.get(i) + ", state : true");
+            savedevice.add("디바이스 이름: " + device_nickname.get(i));
         }
         listView.setAdapter(adapter);
 
@@ -126,7 +126,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                     if (checkedItems.get(i)) {
                         savedevice.remove(i);
                         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference ref = database.getReference( device_uuid.get(i)+"/state");
+                        DatabaseReference ref = database.getReference( device_uuid.get(i)+"/content/delete_state");
                         ref.setValue(false);
                         device_uuid.remove(i);
                         device_nickname.remove(i);

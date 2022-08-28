@@ -46,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
     String value;
     ArrayList<String> device_key = new ArrayList<>();
     ArrayList<String> al_log = new ArrayList<>();
+    ArrayList<String> device_uuid = new ArrayList<>();
     ArrayList<String> device_nickname = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
+    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
     private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         context_main = this;
 
         try{
+            device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
             device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
         } catch(Exception e){
             e.printStackTrace();
@@ -66,11 +69,9 @@ public class MainActivity extends AppCompatActivity {
         al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("device_1/content");
-        DatabaseReference ref2 = database.getReference();
+        DatabaseReference ref = database.getReference();
 
-
-        ref2.addChildEventListener(new ChildEventListener() {
+        ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 device_key.add(snapshot.getKey());
@@ -97,49 +98,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                value = dataSnapshot.getValue(String.class);
-                System.out.println(value);
-                if ("불이야".equals(value)) {
-                    Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                    al_log.add(getTime() + " 불이야");
-                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
-                    startActivity(intent);
-
-                } else if ("도둑이야".equals(value)) {
-                    Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                    al_log.add(getTime() + " 도둑이야");
-                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
-                    startActivity(intent);
-
-                } else if ("조심해".equals(value)) {
-                    Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                    al_log.add(getTime() + " 조심해");
-                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
-                    startActivity(intent);
+        for(int i = 0; i<device_uuid.size(); i++){
+            DatabaseReference ref2 = database.getReference(device_uuid.get(i) + "/content");
+            ref2.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 }
-            }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+                    value = dataSnapshot.getValue(String.class);
+                    System.out.println(value);
+                    if ("불이야".equals(value)) {
+                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                        al_log.add(getTime() + " 불이야");
+                        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+                        startActivity(intent);
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    } else if ("도둑이야".equals(value)) {
+                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                        al_log.add(getTime() + " 도둑이야");
+                        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+                        startActivity(intent);
 
-            }
+                    } else if ("조심해".equals(value)) {
+                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                        al_log.add(getTime() + " 조심해");
+                        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+                        startActivity(intent);
+                    }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        }
 
         int permissionCall = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
         int permissionSMS = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS);
@@ -152,8 +156,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-
-
 
         setting = findViewById(R.id.setting);
         setting.setOnClickListener(new View.OnClickListener() {
