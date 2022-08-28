@@ -45,11 +45,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> device_key = new ArrayList<>();
     ArrayList<String> al_log = new ArrayList<>();
     ArrayList<String> device_uuid = new ArrayList<>();
-    ArrayList<String> device_nickname = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
-    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         try{
             device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
-            device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -175,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim);
 
         statusMessage = (TextView) findViewById(R.id.statusMessage);
-        if(device_nickname.isEmpty()){
+        if(device_uuid.isEmpty()){
             statusMessage.setText("연결된 디바이스가 없습니다.");
         } else{
             iconCircle.setAnimation(animation);
