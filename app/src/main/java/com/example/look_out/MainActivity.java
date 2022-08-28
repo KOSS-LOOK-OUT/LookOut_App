@@ -56,11 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         context_main = this;
 
-        try{
-            device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+
+        device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+
 
         al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
@@ -173,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim);
 
         statusMessage = (TextView) findViewById(R.id.statusMessage);
+
         if(device_uuid.isEmpty()){
             statusMessage.setText("연결된 디바이스가 없습니다.");
         } else{
