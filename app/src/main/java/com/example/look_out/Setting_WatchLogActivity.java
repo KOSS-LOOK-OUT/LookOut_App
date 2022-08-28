@@ -46,7 +46,7 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
-        ArrayAdapter<String> adpater = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 View view = super.getView(position, convertView, parent);
@@ -67,7 +67,7 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
             for (int i = al_log.size() - 1; i >= 0; i--) {
                 allog.add(al_log.get(i));
             }
-            listView.setAdapter(adpater);
+            listView.setAdapter(adapter);
         }
 
         resetButton = findViewById(R.id.resetButton);
@@ -80,7 +80,7 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                 status.setText("보여줄 로그가 없습니다.");
 
-                adpater.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
         });
     }//end of onCreate
