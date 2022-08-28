@@ -45,12 +45,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_device);
 
-        try {
-            device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
-            device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -97,14 +93,14 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 if(checkedItems.size() == 0){
                     Toast.makeText(getApplicationContext(), "삭제 할 디바이스를 선택해주세요.",Toast.LENGTH_SHORT).show();
                 } else{
-                    showDialog();
+                    removeDeviceDialog();
                 }
             }
         }) ;
 
     }//end of onCreate
 
-    public void showDialog(){
+    public void removeDeviceDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("확인").setMessage("선택한 디바이스를 삭제하시겠습니까?");
 
@@ -112,6 +108,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                listView.clearChoices();
+                adapter.notifyDataSetChanged();
             }
         });
 
