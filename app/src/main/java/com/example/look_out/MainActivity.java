@@ -165,19 +165,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        iconCircle = (ImageView)findViewById(R.id.iconCircle);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim);
+
         statusMessage = (TextView) findViewById(R.id.statusMessage);
         if(save_device.isEmpty()){
             statusMessage.setText("연결된 디바이스가 없습니다.");
         } else{
+            iconCircle.setAnimation(animation);
             statusMessage.setText("위험한 소리를 감지하고 있습니다..");
         }
+
+
+
+
     }//end of onCreate
-
-        iconCircle = (ImageView)findViewById(R.id.iconCircle);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_anim);
-        iconCircle.setAnimation(animation);
-    }
-
 
         public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
             boolean check_result = true;
