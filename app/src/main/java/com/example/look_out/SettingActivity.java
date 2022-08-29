@@ -1,5 +1,16 @@
 package com.example.look_out;
 
+/**
+ * @filename SettingActivity.java
+ * @author 이채영
+ * @author 김지윤
+ * @version 1.1
+ * 문자 기본값, 알림, 디바이스 설정하고 알림 기록을 볼 수 있는 클래스
+ * 사용 방법:
+ * 이전 버튼을 누르거나 내장된 이전 버튼을 누르면 메인창으로 돌아간다.
+ * 각각의 설정에 대한 imageButton을 누르면 그에 맞는 설정창으로 이동한다.
+ */
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -21,11 +32,20 @@ public class SettingActivity extends AppCompatActivity {
     private ImageButton settingdevice;
     private ImageButton watchlog;
 
+    /**
+     * 필수 구현 요소
+     * Activity가 생성될 때 실행된다.
+     * @param savedInstanceState 비 영구적 동적 데이터
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        /**
+         * 각각의 설정창으로 넘어가기 위한 클릭 이벤트트
+        */
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +92,9 @@ public class SettingActivity extends AppCompatActivity {
         });
     }//end of onCreate
 
+    /**
+     * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
+     */
     @Override
     public void onBackPressed(){
         super.onBackPressed();
