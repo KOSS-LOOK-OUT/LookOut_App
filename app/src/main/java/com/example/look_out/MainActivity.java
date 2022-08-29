@@ -216,10 +216,22 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        /**
+         * 전화 걸기 권한 ID 가져오기
+         */
         int permissionCall = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
+        /**
+         * 문자 보내기 권한 ID 가져오기
+         */
         int permissionSMS = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS);
 
+        /**
+         * 전화 권한, 문자 권한 중 하나라도 허용되지 않았으면 실행
+         */
         if (permissionCall == PackageManager.PERMISSION_DENIED || permissionSMS == PackageManager.PERMISSION_DENIED) {
+            /**
+             * 사용자가 권한 요청을 명시적으로 거부하였는지 권한 요청을 처음 보거나 다시 묻지 묻지 않음으로 선택하였는지 확인한 후 전화 권한, 문자 권한 요청
+             */
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.CALL_PHONE)|| ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.SEND_SMS)) {
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST);
             } else {
@@ -261,9 +273,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }//end of onCreate
 
+    /**
+     * 권한 체크 이후 돌아가는 메서드로 모든 퍼미션을 허용했는지 체크
+     * @param requestCode 퍼미션 요청 코드로 어떤 권한 세트를 지정했는지 확인하기 위한 임의의 상수
+     * @param permissions 요청한 권한 세트
+     * @param grantResults 요청한 권한 세트의 허용, 거부 결과 세트로 허용, 거부 결과가 담긴 길이
+     */
     public void onRequestPermissionResult ( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         boolean check_result = true;
-        //모든 퍼미션을 허용했는지 체크
         for (int result : grantResults) {
             if (result != PackageManager.PERMISSION_GRANTED) {
                 check_result = false;
@@ -296,6 +313,7 @@ public class MainActivity extends AppCompatActivity {
         String getTime = dateFormat.format(date);
         return getTime;
     }
+    
 
 
     /**
@@ -306,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
      * @param values String 형태로 저장할 ArrayList
      */
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
-        
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         JSONArray a = new JSONArray();
@@ -351,4 +369,3 @@ public class MainActivity extends AppCompatActivity {
         return urls;
     }
 }//end of class
-
