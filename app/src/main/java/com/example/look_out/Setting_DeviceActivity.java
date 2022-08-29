@@ -158,6 +158,9 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         alertDialog.show();
     }//end of removeDeviceDialog
 
+    /**
+     * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
+     */
     @Override
     public void onBackPressed(){
         super.onBackPressed();

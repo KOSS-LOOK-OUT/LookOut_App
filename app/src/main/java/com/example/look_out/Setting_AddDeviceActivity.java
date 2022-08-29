@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 
 public class Setting_AddDeviceActivity extends AppCompatActivity {
-    private ImageView backButton;
+    private ImageView home;
     private Button sendButton;
     private EditText deviceAddEdit;
     private EditText deviceAddId;
@@ -53,11 +54,11 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
         device_key = ((MainActivity)MainActivity.context_main).device_key;
 
-        backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Setting_AddDeviceActivity.this, Setting_DeviceActivity.class);
+                Intent intent = new Intent(Setting_AddDeviceActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -172,6 +173,10 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
             }
         }
         return urls;
+    }
+
+    public boolean onKeyDown(int keycode, KeyEvent event) {
+        return true;
     }
 
 }//end of class

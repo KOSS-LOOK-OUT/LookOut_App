@@ -110,8 +110,8 @@ public class MessageActivity extends AppCompatActivity {
 
     /**
      * 메인창으로 돌아갈지 확인 후 선택에 맞게 처리.
-     * 취소 버튼을 누른 경우 아무일도 일어나지 않고 다시 메세지 창으로 돌아간다.
-     * 돌아가기 버튼을 누른 경우 메인 화면으로 돌아간다.
+     * 취소 버튼을 누른 경우: 아무일도 일어나지 않고 다시 메세지 창으로 돌아간다.
+     * 돌아가기 버튼을 누른 경우: 메인 화면으로 돌아간다.
      */
     public void goMainDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -137,9 +137,9 @@ public class MessageActivity extends AppCompatActivity {
 
     /**
      * 이전버튼 무력화를 위한 함수
-     * @param keycode
-     * @param event
-     * @return true를 입력해서 이전 버튼이 먹히지 않도록 한다
+     * @param keycode 들어오는 키값(ex) 이전버튼, 숫자 키패드 등)
+     * @param event 키를 누를시 실행 할 이벤트
+     * @return true만 리턴하여 이전 버튼이 먹히지 않도록 한다
      */
     @Override
     public boolean onKeyDown(int keycode, KeyEvent event) {
@@ -147,9 +147,10 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param phoneNumber
-     * @param message_119
+     * 문자 전송을 위한 함수
+     * @param phoneNumber 문자를 전송할 번호
+     * @param message_119 전송할 내용
+     * @exception Exception 문자 전송이 실패한 경우 실패함을 사용자에게 알린다
      */
     private void sendSMS(String phoneNumber, String message_119) {
         try {
