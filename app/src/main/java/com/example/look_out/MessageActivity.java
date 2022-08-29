@@ -46,7 +46,7 @@ public class MessageActivity extends AppCompatActivity {
     String phoneNo;
 
     /**
-     * @param savedInstanceState 비 영구적 동적 데이터
+     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

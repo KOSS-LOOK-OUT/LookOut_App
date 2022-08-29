@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
      * 필수 구현 요소
      * Activity가 생성될 때 실행된다.
      * 화면 정의하는 용도로 많이 사용한다.
-     * @param savedInstanceState 비 영구적 동적 데이터
+     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

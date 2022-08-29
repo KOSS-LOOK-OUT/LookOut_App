@@ -35,7 +35,7 @@ public class SettingActivity extends AppCompatActivity {
     /**
      * 필수 구현 요소
      * Activity가 생성될 때 실행된다.
-     * @param savedInstanceState 비 영구적 동적 데이터
+     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         /**
-         * 각각의 설정창으로 넘어가기 위한 클릭 이벤트트
+         * 각각의 설정창으로 넘어가기 위한 클릭 이벤트
         */
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
