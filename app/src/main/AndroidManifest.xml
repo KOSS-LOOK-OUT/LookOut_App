@@ -2,16 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.look_out">
+
     <!-- 무음모드일 때 진동 설정하기 위한 퍼미션 -->
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" /> <!-- 메시지 보내기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+    <!-- 메시지 보내기 위한 퍼미션 -->
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 전화 걸기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 전화 걸기 위한 퍼미션 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.DIAL_PHONE" /> <!-- 진동 울리기 위한 퍼미션 -->
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 전화 권한 설정하기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.DIAL_PHONE" />
+
+    <!-- 진동 울리기 위한 퍼미션 -->
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 전화 권한 설정하기 위한 퍼미션 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.DIAL_PHONE" /> <!-- 문자 권한 설정하기 위한 퍼미션 -->
+    <uses-permission android:name="android.permission.DIAL_PHONE" />
+    <!-- 문자 권한 설정하기 위한 퍼미션 -->
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
