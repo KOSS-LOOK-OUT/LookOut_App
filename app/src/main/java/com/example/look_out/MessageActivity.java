@@ -46,6 +46,8 @@ public class MessageActivity extends AppCompatActivity {
     String phoneNo;
 
     /**
+     * 필수 구현 요소
+     * Activity가 생성될 때 실행된다.
      * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
      */
     @Override

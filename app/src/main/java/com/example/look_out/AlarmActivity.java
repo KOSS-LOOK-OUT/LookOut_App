@@ -38,7 +38,7 @@ public class AlarmActivity extends AppCompatActivity {
      * 감지된 소리의 내용(불이야, 조심해, 도둑이야)
      */
     String value;
-    
+
     /**
      * 문자를 연결할 전화번호
      */
@@ -47,8 +47,9 @@ public class AlarmActivity extends AppCompatActivity {
     private ImageView imageView;
 
     /**
-     * 엑티비티 생성 단계에서 한번 실행되는 메서드이다.
-     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
+     * 필수 구현 요소
+     * Activity가 생성될 때 실행된다.
+     *@params savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,7 @@ public class AlarmActivity extends AppCompatActivity {
         }
 
         /**
-         * 각각의 Button을 누르면 진동을 멈추고 call은 전화 창으로 message는 메세지 창으로 off는 메인 창으로 이동한다.
+         * 각각의 버튼을 누르면 진동을 멈추고 call은 전화 창으로 message는 메세지 창으로 off는 메인 창으로 이동한다.
          * @param view View에서 클릭되었을 때 정의된 이름의 함수를 호출
          */
         callButton.setOnClickListener(new View.OnClickListener() {
