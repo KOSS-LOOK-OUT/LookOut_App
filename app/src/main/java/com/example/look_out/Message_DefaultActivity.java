@@ -94,7 +94,9 @@ public class Message_DefaultActivity extends AppCompatActivity {
         });
 
         /**
-         * 저장 버튼을 누르면 editor를 preferences에 쓰겠다고 연결한다.
+         * 저장 버튼을 누르면 문구를 입력했는지 안했는지 확인을 한다.
+         * 문구를 입력하지 않았다면 입력하라는 토스트 메시지를 보여준다.
+         * 문구를 입력했다면 editor를 preferences에 쓰겠다고 연결한다.
          * 키 값을 message로 한 preferences에 값을 put 한다.
          * commit을 해서 저장하고 토스트 메세지를 보여준다.
          */
@@ -103,11 +105,16 @@ public class Message_DefaultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 message = et_setting.getText().toString();
-                SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("message", message);
-                editor.commit();
-                Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
+                if(message.equals("")){
+                    Toast.makeText(getApplicationContext(), "문구를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("message", message);
+                    editor.commit();
+                    Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
