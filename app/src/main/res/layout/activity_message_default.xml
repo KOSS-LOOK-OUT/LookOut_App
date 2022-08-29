@@ -63,6 +63,7 @@
         android:gravity="top"
         android:hint="응급 상황에 전송할 문구를 작성해주세요."
         android:textColorHint="#818181"
+        android:privateImeOptions="defaultInputmode=korean"
         android:textSize="13.5dp"
         android:textColor="#E6E6E6"
         app:layout_constraintBottom_toBottomOf="parent"
