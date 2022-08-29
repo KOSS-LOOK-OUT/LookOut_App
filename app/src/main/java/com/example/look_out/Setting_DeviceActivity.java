@@ -3,12 +3,15 @@ package com.example.look_out;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.SparseBooleanArray;
 import android.view.View;
@@ -102,7 +105,7 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
     public void removeDeviceDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("확인").setMessage("선택한 디바이스를 삭제하시겠습니까?");
+        builder.setTitle("확인").setMessage("선택한 디바이스를 삭제하시겠습니까? 삭제할 경우 앱이 재실행됩니다.");
 
 
         builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -134,7 +137,20 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
                 adapter.notifyDataSetChanged();
 
-                Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "삭제되었습니다. 앱이 재실행됩니다.", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        PackageManager packageManager = getPackageManager();
+                        Intent intent = packageManager.getLaunchIntentForPackage(getPackageName());
+                        ComponentName componentName = intent.getComponent();
+                        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+                        startActivity(mainIntent);
+                        System.exit(0);
+                    }
+                }, 200);
             }
         });
 
