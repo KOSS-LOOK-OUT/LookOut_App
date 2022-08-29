@@ -20,11 +20,10 @@ import android.widget.TextView;
  * message 버튼을 누르면 응급 번호(119, 112)로 문자가 전송되는 창으로 엑티비티가 이동하며 진동이 멈춤
  * off 버튼을 누르면 진동이 멈추며 메인 엑티비티로 창이 이동함
  *
+ * @author 이채영
  * @author 김언지
  * @author 김지윤
  * @version 1.0
- * @see     com.example.look_out.Message_DefaultActivity
- * @see     com.example.look_out.MessageActivity
  */
 public class AlarmActivity extends AppCompatActivity {
     private Button callButton;
