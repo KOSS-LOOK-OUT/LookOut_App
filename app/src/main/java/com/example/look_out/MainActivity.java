@@ -5,7 +5,7 @@ package com.example.look_out;
  * @author 이채영
  * @author 김지윤
  * @author 김언지
- * @version 1.1
+ * @version 2.0
  * 앱이 실행되면 처음으로 나오는 클래스
  * 사용 방법:
  * 이전 버튼을 한 번 누르면 한번 더 이전버튼을 누르면 앱이 종료된다는 메세지가 뜨고 1.5초안에 한 번 더 누르면 앱이 종료된다.

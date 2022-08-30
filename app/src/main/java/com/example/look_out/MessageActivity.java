@@ -4,7 +4,7 @@ package com.example.look_out;
  * @author 이채영
  * @author 김지윤
  * @author 김언지
- * @version 1.1
+ * @version 2.0
  * 비상 상황에 문자 전송을 하기 위한 창을 나타내는 클래스
  * 사용 방법:
  * 이전 버튼을 누르면 정말로 홈화면으로 돌아갈 것인지 물어보는 창이 나오고 '돌아가기'를 누르면 다시 메인창으로 돌아갑니다.

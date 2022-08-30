@@ -3,7 +3,7 @@ package com.example.look_out;
  *@filename MessageActivity.java
  *@author 이채영
  *@author 김지윤
- *@version 1.1
+ *@version 2.0
  *알림의 진동 유무를 결정하기 위한 클래스
  *사용 방법:
  *스위치를 켜면 알림이 울릴 때 진동이 울리도록 한다.

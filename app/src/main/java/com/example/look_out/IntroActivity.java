@@ -2,7 +2,7 @@ package com.example.look_out;
 /**
  *@filename MessageActivity.java
  *@author 이채영
- *@version 1.1
+ *@version 2.0
  *앱 실행시 시작 화면을 잠깐 보여주기 위한 클래스
  */
 import android.content.Intent;

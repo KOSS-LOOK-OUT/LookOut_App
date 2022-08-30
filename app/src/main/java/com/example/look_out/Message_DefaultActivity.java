@@ -5,7 +5,7 @@ package com.example.look_out;
  * @author 이채영
  * @author 김지윤
  * @author 김언지
- * @version 1.1
+ * @version 2.0
  * 비상 상황에 보낼 문자의 기본값을 설정할 수 있는 클래스
  * 사용 방법:
  * 이전 버튼을 누르거나 내장된 이전 버튼을 누르면 설정 창으로 돌아간다.

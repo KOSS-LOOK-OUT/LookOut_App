@@ -4,7 +4,7 @@ package com.example.look_out;
  * @filename SettingActivity.java
  * @author 이채영
  * @author 김지윤
- * @version 1.1
+ * @version 2.0
  * 문자 기본값, 알림, 디바이스 설정하고 알림 기록을 볼 수 있는 클래스
  * 사용 방법:
  * 이전 버튼을 누르거나 내장된 이전 버튼을 누르면 메인창으로 돌아간다.
