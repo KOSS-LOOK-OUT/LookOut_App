@@ -1,5 +1,16 @@
 package com.example.look_out;
-
+/**
+ * @filename MessageActivity.java
+ * @author 이채영
+ * @author 김지윤
+ * @version 2.0
+ * 연결된 디바이스들을 보여주고 디바이스를 추가, 삭제 하는 클래스
+ * 사용 방법:
+ * 이전 버튼을 누르면 설정창으로 돌아간다.
+ * '추가'를 누르면 디바이스 추가를 위한 Activity로 넘어간다.
+ * 삭제하고 싶은 디바이스를 선택해 '삭제'를 누르면 정말 삭제할 것인지 묻고 삭제를 진행한다.
+ * 단, 여기서 디바이스를 삭제하면 앱이 재실행된다.
+ */
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,9 +48,24 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     private Button deleteButton;
     private ListView listView;
 
+    /**
+     * 저장된 디바이스들을 보여주는 listView를 만들기 위한 리스트
+     */
     ArrayList<String> savedevice = new ArrayList<>();
+
+    /**
+     * 연결된 디바이스를 저장하기 위한 리스트
+     */
     ArrayList<String> device_uuid = new ArrayList<>();
+
+    /**
+     * listView에서 디바이스 이름을 보여주기 위한 리스트
+     */
     ArrayList<String> device_nickname = new ArrayList<>();
+
+    /**
+     * listView에 추가 한 후 창에 띄우기 위한 ArrayAdapter
+     */
     ArrayAdapter<String> adapter;
 
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
@@ -77,8 +103,14 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         });
 
         listView = (ListView)findViewById(R.id.listView);
-
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, savedevice){
+            /**
+             * listView의 폰트 색상을 바꾸기 위해 쓰인 함수
+             * @param position 각 value의 위치
+             * @param convertView 실제 화면에 그려지는 아이템을 관리하는 배열
+             * @param parent getView에 의해 접근될 view
+             * @return 여러 설정을 거친 후 view값을 리턴한다
+             */
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 View view = super.getView(position, convertView, parent);
@@ -94,10 +126,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         }
         listView.setAdapter(adapter);
 
-
         deleteButton = findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new Button.OnClickListener() {
-
             public void onClick(View v) {
                 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                 if(checkedItems.size() == 0){
@@ -110,6 +140,11 @@ public class Setting_DeviceActivity extends AppCompatActivity {
 
     }//end of onCreate
 
+    /**
+     * 정말로 삭제할지 사용자에게 재차 확인하는 창을 띄우기 위한 함수
+     * '취소' 버튼을 누르면 선택 표시를  초기화한다.
+     * '삭제' 버튼을 누르면 체크한 디바이스들을 삭제한다.
+     */
     public void removeDeviceDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("확인").setMessage("선택한 디바이스를 삭제하시겠습니까? 삭제할 경우 앱이 재실행됩니다.");
@@ -129,6 +164,9 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
                 int count = adapter.getCount();
 
+                /**
+                 * device, uuid, nickname이 기록된 리스트에서 모두 삭제한다.
+                 */
                 for (int i = count-1; i >= 0; i--) {
                     if (checkedItems.get(i)) {
                         savedevice.remove(i);
@@ -137,14 +175,20 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                     }
                 }
 
+                /**
+                 * ArrayList의 데이터를 Json 형식으로 변환하여 1개의 String으로 만든 후 이를 SharedPreferences에 각각의 키 값으로 저장한다.
+                 */
                 setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
                 setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_nickname);
-                // 모든 선택 상태 초기화.
+
                 listView.clearChoices() ;
-
                 adapter.notifyDataSetChanged();
-
                 Toast.makeText(getApplicationContext(), "삭제되었습니다. 앱이 재실행됩니다.", Toast.LENGTH_SHORT).show();
+                
+                /**
+                 * 삭제 후 앱을 재실행한다.
+                 * 재실행 하기 전 약간의 딜레이를 주어 토스트 메세지를 띄운다.
+                 */
                 new Handler().postDelayed(new Runnable()
                 {
                     @Override
