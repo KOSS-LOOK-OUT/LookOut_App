@@ -102,7 +102,7 @@ public class Message_DefaultActivity extends AppCompatActivity {
          * 문구를 입력하지 않았다면 입력하라는 토스트 메시지를 보여준다.
          * 문구를 입력했다면 editor를 preferences에 쓰겠다고 연결한다.
          * 키 값을 message로 한 preferences에 값을 put 한다.
-         * commit을 해서 저장하고 토스트 메세지를 보여준다.
+         * commit 해서 저장하고 토스트 메세지를 보여준다.
          */
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
