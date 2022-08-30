@@ -1,5 +1,10 @@
 package com.example.look_out;
-
+/**
+ *@filename MessageActivity.java
+ *@author 이채영
+ *@version 1.1
+ *앱 실행시 시작 화면을 잠깐 보여주기 위한 클래스
+ */
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +24,10 @@ public class IntroActivity extends AppCompatActivity {
         moveMain(1);
     }
 
+    /**
+     * 특정 시간만큼 시작 화면을 보여주고 메인으로 넘어가기 위한 함수
+     * @param sec 창을 보여주는 시간(sec초만큼 보여준다)
+     */
     private void moveMain(int sec) {
         new Handler().postDelayed(new Runnable()
         {
