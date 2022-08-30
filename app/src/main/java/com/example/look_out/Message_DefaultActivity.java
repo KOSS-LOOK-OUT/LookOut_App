@@ -27,7 +27,11 @@ import android.widget.Toast;
 
 public class Message_DefaultActivity extends AppCompatActivity {
 
+    /**
+     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
+     */
     public static Context context_main;
+
     private ImageView backButton;
     private Button saveButton;
     private Button resetButton;

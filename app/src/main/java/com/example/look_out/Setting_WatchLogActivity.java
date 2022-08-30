@@ -25,11 +25,24 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
     private ListView listView;
     private Button resetButton;
     private TextView status;
+
+    /**
+     * 알림 기록을 저장하기 위한 리스트
+     */
     ArrayList<String> al_log = new ArrayList<>();
+
+    /**
+     * 알림 기록을 리스트 뷰에 보여주기 위한 리스트
+     */
     ArrayList<String> allog = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
 
+    /**
+     * 필수 구현 요소
+     * Activity가 생성될 때 실행된다.
+     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +98,9 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         });
     }//end of onCreate
 
+    /**
+     * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
+     */
     @Override
     public void onBackPressed(){
         super.onBackPressed();
@@ -92,6 +108,12 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * ArrayList를 Json으로 변환하여 SharedPreferences에 String을 저장한다.
+     * @param context 애플리케이션의 현재 상태
+     * @param key SharedPreference를 보낼 key 값
+     * @param values String 형태로 저장할 ArrayList
+     */
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -111,6 +133,11 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * SharedPreferences에서 Json형식의 String을 가져와서 다시 ArrayList로 변환한다.
+     * @param context 애플리케이션의 현재 상태
+     * @param key SharedPreference를 받아올 key 값
+     */
     private ArrayList getStringArrayPref(Context context, String key) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

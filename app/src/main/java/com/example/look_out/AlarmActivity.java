@@ -29,8 +29,9 @@ public class AlarmActivity extends AppCompatActivity {
     private Button callButton;
     private Button offButton;
     private Button messageButton;
+
     /**
-     * 소리가 감지 되었는지에 대한 여부
+     * 알림 진동 설정을 위한 변수
      */
     Boolean sound;
 

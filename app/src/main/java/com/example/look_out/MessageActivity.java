@@ -30,6 +30,7 @@ public class MessageActivity extends AppCompatActivity {
     private EditText et_default;
     private Button sendButton;
     private TextView tv;
+
     /**
      * 입력 될 메세지 내용
      */

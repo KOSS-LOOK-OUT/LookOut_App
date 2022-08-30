@@ -17,12 +17,29 @@ import android.widget.Toast;
 public class Setting_AlarmActivity extends AppCompatActivity {
 
     static Switch Sound;
+
+    /**
+     * 저장할 파일 이름
+     */
     String shared = "file";
+
+    /**
+     * 알림 진동 설정을 위한 변수
+     */
     Boolean sound;
+
+    /**
+     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
+     */
     public static Context context_main;
     private ImageView backButton;
     private TextView vibrationinform;
 
+    /**
+     * 필수 구현 요소
+     * Activity가 생성될 때 실행된다.
+     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +96,9 @@ public class Setting_AlarmActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
+     */
     @Override
     public void onBackPressed(){
         super.onBackPressed();

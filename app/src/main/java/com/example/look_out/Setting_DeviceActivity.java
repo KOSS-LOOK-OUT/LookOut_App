@@ -36,13 +36,20 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     private Button addButton;
     private Button deleteButton;
     private ListView listView;
+
     ArrayList<String> savedevice = new ArrayList<>();
     ArrayList<String> device_uuid = new ArrayList<>();
     ArrayList<String> device_nickname = new ArrayList<>();
     ArrayAdapter<String> adapter;
+
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
     private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
 
+    /**
+     * 필수 구현 요소
+     * Activity가 생성될 때 실행된다.
+     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,6 +175,12 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * ArrayList를 Json으로 변환하여 SharedPreferences에 String을 저장한다.
+     * @param context 애플리케이션의 현재 상태
+     * @param key SharedPreference를 보낼 key 값
+     * @param values String 형태로 저장할 ArrayList
+     */
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -187,6 +200,11 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * SharedPreferences에서 Json형식의 String을 가져와서 다시 ArrayList로 변환한다.
+     * @param context 애플리케이션의 현재 상태
+     * @param key SharedPreference를 받아올 key 값
+     */
     private ArrayList getStringArrayPref(Context context, String key) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

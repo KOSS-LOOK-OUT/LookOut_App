@@ -34,6 +34,10 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
     private Button sendButton;
     private EditText deviceAddEdit;
     private EditText deviceAddId;
+
+    /**
+     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
+     */
     public static Context context_main;
     String key;
     String nickname;
@@ -43,6 +47,12 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
 
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
     private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
+
+    /**
+     * 필수 구현 요소
+     * Activity가 생성될 때 실행된다.
+     * @param savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +138,9 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         });
     }//end of onCreate
 
+    /**
+     * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
+     */
     @Override
     public void onBackPressed(){
         super.onBackPressed();
@@ -135,6 +148,12 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * ArrayList를 Json으로 변환하여 SharedPreferences에 String을 저장한다.
+     * @param context 애플리케이션의 현재 상태
+     * @param key SharedPreference를 보낼 key 값
+     * @param values String 형태로 저장할 ArrayList
+     */
     private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -154,6 +173,11 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /**
+     * SharedPreferences에서 Json형식의 String을 가져와서 다시 ArrayList로 변환한다.
+     * @param context 애플리케이션의 현재 상태
+     * @param key SharedPreference를 받아올 key 값
+     */
     private ArrayList getStringArrayPref(Context context, String key) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -175,6 +199,12 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         return urls;
     }
 
+    /**
+     * 이전버튼 무력화를 위한 함수
+     * @param keycode 들어오는 키값(ex) 이전버튼, 숫자 키패드 등)
+     * @param event 키를 누를시 실행 할 이벤트
+     * @return true만 리턴하여 이전 버튼이 먹히지 않도록 한다
+     */
     public boolean onKeyDown(int keycode, KeyEvent event) {
         return true;
     }
