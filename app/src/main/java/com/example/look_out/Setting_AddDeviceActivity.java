@@ -1,5 +1,15 @@
 package com.example.look_out;
-
+/**
+ *@filename MessageActivity.java
+ *@author 이채영
+ *@author 김지윤
+ *@author 김언지
+ *@version 1.1
+ *비상 상황에 문자 전송을 하기 위한 창을 나타내는 클래스
+ *사용 방법:
+ *어쩌구어쩌구
+ *저쩌구저쩌구
+ */
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,10 +49,30 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
      * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
      */
     public static Context context_main;
+
+    /**
+     * 디바이스의 인증번호
+     */
     String key;
+
+    /**
+     * 사용자가 입력한 디바이스 이름
+     */
     String nickname;
+
+    /**
+     * 디바이스 키를 모아둔 리스트
+     */
     ArrayList<String> device_key = new ArrayList<>();
+
+    /**
+     * 디바이스의 uuid를 모아둔 리스트
+     */
     ArrayList<String> device_uuid = new ArrayList<>();
+
+    /**
+     * 디바이스의 이름을 모아둔 리스트
+     */
     ArrayList<String> device_nickname = new ArrayList<>();
 
     private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
@@ -58,12 +88,29 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_device_add);
 
+        /**
+         *다른 Activity에서 context변수를 통해 MainActivity에 접근이 가능하게 한다.
+         */
         context_main = this;
 
+        /**
+         * SharedPreferences의 키 값 SETTINGS_PLAYER_JSON2에 접근해 Json형식의 String을 읽어와 다시 ArrayList로 변환해 device_uuid에 저장한다.
+         */
         device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+
+        /**
+         * SharedPreferences의 키 값 SETTINGS_PLAYER_JSON3에 접근해 Json형식의 String을 읽어와 다시 ArrayList로 변환해 device_nickname에 저장한다.
+         */
         device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
+
+        /**
+         * MainActivity의 device_key 값을 가져온다.
+         */
         device_key = ((MainActivity)MainActivity.context_main).device_key;
 
+        /**
+         * 메인 화면으로 넘어가기 위한 함수
+         */
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,11 +125,18 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
 
         sendButton = (Button)findViewById(R.id.sendButton);
         sendButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * 전송버튼을 누르면 발생하는 이벤트
+             * @param view 사용자가 클릭한 위젯이 들어가는 변수
+             */
             @Override
             public void onClick(View view) {
                 key = deviceAddEdit.getText().toString();
                 nickname = deviceAddId.getText().toString();
 
+                /**
+                 * 사용자가 입력한 인증번호와 닉네임 값에 따라 알맞은 이벤트를 발생시킨다.
+                 */
                 if (device_nickname.contains(nickname)){
                     Toast.makeText(getApplicationContext(), "중복된 이름입니다!", Toast.LENGTH_SHORT).show();
                     deviceAddId.setText("");
@@ -98,6 +152,12 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "디바이스 추가에 성공 했습니다!", Toast.LENGTH_SHORT).show();
                     device_nickname.add(nickname);
                     ref.addChildEventListener(new ChildEventListener() {
+
+                        /**
+                         * 데이터 베이스에 값이 추가될 때 실행되는 함수
+                         * @param snapshot 하위 요소의 업데이트된 데이터 포함
+                         * @param previousChildName 이전 자식 노드의 이름
+                         */
                         @Override
                         public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                             if(!snapshot.getValue().toString().equals("true")){
