@@ -1,1 +1,1 @@
-## ![img](https://github.com/KOSS-LOOK-OUT/LookOut_App/blob/94b9523f1f26b3960a815e6859fd4edad3ae1a42/app/src/main/res/drawable/lookout_icon.png) LookOut
+<center><img src="https://github.com/KOSS-LOOK-OUT/LookOut_App/blob/1b37d3ddc6be590f07913c214b1cc85671676c2a/app/src/main/res/drawable/lookout_main.png" width="50" height="50"> LookOut </center>
