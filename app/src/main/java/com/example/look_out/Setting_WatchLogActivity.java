@@ -1,5 +1,16 @@
 package com.example.look_out;
-
+/**
+ * @filename MessageActivity.java
+ * @author 김지윤
+ * @author 김언지
+ * @author 이채영
+ * @version 2.0
+ * 알림창 기록을 보여주는 클래스
+ * 사용 방법:
+ * 이전 버튼을 누르면 설정창으로 넘어간다.
+ * 초기화 버튼을 누르면 기록들이 모두 초기화된다.
+ * 알림은 최대 50개까지 보이며 50개가 넘어갈 시 가장 오래된 로그부터 먼저 삭제 된다.
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -58,8 +69,14 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         });
 
         listView = (ListView)findViewById(R.id.listView);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
+            /**
+             * listView의 폰트 색상을 바꾸기 위해 쓰인 함수
+             * @param position 각 value의 위치
+             * @param convertView 실제 화면에 그려지는 아이템을 관리하는 배열
+             * @param parent getView에 의해 접근될 view
+             * @return 여러 설정을 거친 후 view값을 리턴한다
+             */
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 View view = super.getView(position, convertView, parent);
@@ -68,8 +85,11 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 return view;
             }
         };
-        al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
+        /**
+         * SharedPreferences의 키값 SETTINGS_PLAYER_JSON에 접근해서 Json형식의 String을 읽어와 다시ArrayList로 변환해 al_log에 저장한다.
+         */
+        al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
         status = (TextView)findViewById(R.id.status);
 
         if(al_log.size() == 0){
@@ -85,14 +105,20 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
 
         resetButton = findViewById(R.id.resetButton);
         resetButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * 로그 내용을 담은 리스트를 지운다.
+             * @param view 사용자가 클릭한 위젯이 들어간다
+             */
             @Override
             public void onClick(View view) {
                 allog.clear();
                 al_log.clear();
 
+                /**
+                 * ArrayList의 데이터(al_log)를 Json형식으로 변환하여 1개의 String으로 만든 후 이를 SharedPreferences에 키 값 SETTINGS_PLAYER_JSON으로 저장한다.
+                 */
                 setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                 status.setText("보여줄 로그가 없습니다.");
-
                 adapter.notifyDataSetChanged();
             }
         });
