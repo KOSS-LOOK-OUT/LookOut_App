@@ -1,5 +1,13 @@
 package com.example.look_out;
-
+/**
+ *@filename MessageActivity.java
+ *@author 이채영
+ *@author 김지윤
+ *@version 1.1
+ *알림의 진동 유무를 결정하기 위한 클래스
+ *사용 방법:
+ *스위치를 켜면 알림이 울릴 때 진동이 울리도록 한다.
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -15,7 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Setting_AlarmActivity extends AppCompatActivity {
-
+    /**
+     * 알림 진동 설정을 위한 변수
+     */
     static Switch Sound;
 
     /**
@@ -45,6 +55,9 @@ public class Setting_AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_alarm);
 
+        /**
+         *다른 Activity에서 context변수를 통해 Setting_AlarmActivity에 접근이 가능하게 한다.
+         */
         context_main = this;
 
         backButton = findViewById(R.id.backButton);
@@ -57,6 +70,9 @@ public class Setting_AlarmActivity extends AppCompatActivity {
         });
 
 
+        /**
+         * sound switch가 켜져있을 경우 진동이 울리도록 한다.
+         */
         Sound = findViewById(R.id.Sound);
         SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
         sound = sharedPreferences.getBoolean("switch", false);
@@ -70,26 +86,23 @@ public class Setting_AlarmActivity extends AppCompatActivity {
         }
 
         Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-
-
-
+            /**
+             * 스위치값에 따라 진동 유무를 AlarmAcitivty에 전송하는 함수
+             * @param buttonView 연결 된 스위치값
+             * @param isChecked 스위치의 상태를 받아온다
+             * 스위치 값이 바뀔 경우 바뀐 상태를 AlarmAcitivity에 전송하고 커밋한다.
+             * 또한 바뀐 스위치값에 따라 설정 정보를 수정한다.
+             */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("switch", Sound.isChecked());
                 editor.commit();
-
                 if(isChecked){
-                    vibrationinform = (TextView)findViewById(R.id.vibrationinform);
                     vibrationinform.setText("무음모드에서도 진동이 울립니다.");
-                    //토스트 메시지(무음모드인 경우에도 진동이 울립니다.)
-                    Toast.makeText(Setting_AlarmActivity.this, "무음모드인 경우에도 진동이 울립니다.", Toast.LENGTH_SHORT).show();
                 } else{
-                    vibrationinform = (TextView)findViewById(R.id.vibrationinform);
                     vibrationinform.setText("무음모드에서는 진동이 울리지 않습니다.");
-                    //토스트 메시지(무음모드인 경우 진동이 울리지 않습니다.)
-                    Toast.makeText(Setting_AlarmActivity.this, "무음모드인 경우 진동이 울리지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

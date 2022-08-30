@@ -1,10 +1,9 @@
 package com.example.look_out;
 /**
  *@filename MessageActivity.java
- *@author 이채영
  *@author 김지윤
- *@author 김언지
- *@version 1.1
+ *@author 이채영
+ *@version 2.0
  *비상 상황에 문자 전송을 하기 위한 창을 나타내는 클래스
  *사용 방법:
  *어쩌구어쩌구
