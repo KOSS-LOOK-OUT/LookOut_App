@@ -1,4 +1,4 @@
-# <img src="./img/logo.png" width="30" height="30"/> Look out
+# <img src="./img/logo.png" width="30"/> Look out
 
 ## 목차
 
@@ -70,11 +70,11 @@
 
 #### 전체 시스템 구성
 
-- ![image]()
+<img src="./img/system.png" width="600">
 
 #### 다중 연결 아키텍처
 
-- <img src="" width="600" height="400">
+<img src="" width="600">
 
 ---
 
