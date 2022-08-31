@@ -16,18 +16,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private final int MY_PERMISSIONS_REQUEST = 1000;
     private ImageView iconCircle;
     private TextView statusMessage;
+    private Button ForeGroundButton;
 
     /**
      * 감지된 소리의 내용(불이야, 조심해, 도둑이야)
@@ -89,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -96,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
          * 다른 Activity에서 context변수를 통해 MainActivity에 접근이 가능하게 한다.
          */
         context_main = this;
+
+        Intent intent = new Intent(this, ForegroundService.class);
+        startService(intent);
 
         /**
          * SharedPreferences에 키값 SETTINGS_PLAYER_JSON2에 접근해서 Json 형식의 String을 읽어와 다시 ArrayList로 변환해 device_uuid에 저장한다.
@@ -172,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
                     value = dataSnapshot.getValue(String.class);
+                    System.out.println(value);
 
                     if ("불이야".equals(value)) {
                         Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
@@ -244,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         /**
          * activity_main.xml파일에서 id가 iconCircle과 statusMessage으로 설정된 View를 가져온다.
          * rotate_anim.xml 불러와 animation을 정의한다.
@@ -305,7 +319,7 @@ public class MainActivity extends AppCompatActivity {
         String getTime = dateFormat.format(date);
         return getTime;
     }
-    
+
 
 
     /**
@@ -358,4 +372,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return urls;
     }
+
 }//end of class
