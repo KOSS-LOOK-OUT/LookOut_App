@@ -94,7 +94,7 @@
         android:layout_width="75dp"
         android:layout_height="35dp"
         android:background="@drawable/border_whitebutton"
-        android:text="초기화"
+        android:text="지우기"
         android:textColor="@color/black"
         android:textSize="13dp"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
