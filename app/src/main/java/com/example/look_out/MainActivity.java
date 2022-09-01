@@ -16,13 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -177,18 +185,22 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                         al_log.add(getTime() + " 불이야");
                         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+                        makePush(value);
                         startActivity(intent);
+
 
                     } else if ("도둑이야".equals(value)) {
                         Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                         al_log.add(getTime() + " 도둑이야");
                         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+                        makePush(value);
                         startActivity(intent);
 
                     } else if ("조심해".equals(value)) {
                         Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
                         al_log.add(getTime() + " 조심해");
                         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+                        makePush(value);
                         startActivity(intent);
                     }
                 }
@@ -247,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * activity_main.xml파일에서 id가 iconCircle과 statusMessage으로 설정된 View를 가져온다.
          * rotate_anim.xml 불러와 animation을 정의한다.
-         * 연결된 디바이스가 없으면 "연결된 디바이스가 없습니다." 문구를 띄윤다.
+         * 연결된 디바이스가 없으면 "연결된 디바이스가 없습니다." 문구를 띄운다.
          * 연결된 디바이스가 한 개라도 있으면 애니메이션을 iconCircle을 돌아가게끔 애니메이션을 set 해주고 "위험한 소리를 감지하고 있습니다.."라는 문구를 띄워준다.
          */
         iconCircle = (ImageView)findViewById(R.id.iconCircle);
@@ -262,6 +274,52 @@ public class MainActivity extends AppCompatActivity {
             statusMessage.setText("위험한 소리를 감지하고 있습니다..");
         }
     }//end of onCreate
+
+    /**
+     * 푸쉬 알림을 생성하는 메소드
+     * @param s 키워드값(ex) 불이야, 조심해, 도둑이야)
+     */
+    public void makePush(String s) {
+
+        NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder= null;
+
+        /**
+         * Oreo 버전(API26 버전)이상에서는 알림시에 NotificationChannel 이라는 개념이 필수 구성요소가 되었다.
+         */
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            String channelID="channel_01"; //알림채널 식별자
+            String channelName="MyChannel01"; //알림채널의 이름(별명)
+
+            NotificationChannel channel= new NotificationChannel(channelID,channelName,NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+
+            builder=new NotificationCompat.Builder(this, channelID);
+        }else{
+            builder= new NotificationCompat.Builder(MainActivity.this, (Notification) null);
+        }
+
+        builder.setSmallIcon(R.drawable.group221);
+        builder.setContentTitle("위험 감지");
+        builder.setContentText("\"" + s + "\" 소리가 감지되었습니다!");
+
+        Bitmap bm= BitmapFactory.decodeResource(getResources(),R.drawable.group221);
+        builder.setLargeIcon(bm);//매개변수가 Bitmap을 줘야한다.
+
+        /**
+         * 푸쉬 알림을 누르면 앱의 MainActivity가 실행된다.
+         */
+        PendingIntent intent;
+        intent = PendingIntent.getActivity(this, 0, new Intent(getApplicationContext(), MainActivity.class),
+                PendingIntent.FLAG_MUTABLE);
+        builder.setContentIntent(intent);
+
+        Notification notification=builder.build();
+        notificationManager.notify(1, notification);
+
+
+
+    }
 
     /**
      * 권한 체크 이후 돌아가는 메서드로 모든 퍼미션을 허용했는지 체크한다.
