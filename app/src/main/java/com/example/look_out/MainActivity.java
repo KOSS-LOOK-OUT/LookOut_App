@@ -23,6 +23,7 @@ import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -258,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * activity_main.xml파일에서 id가 iconCircle과 statusMessage으로 설정된 View를 가져온다.
          * rotate_anim.xml 불러와 animation을 정의한다.
-         * 연결된 디바이스가 없으면 "연결된 디바이스가 없습니다." 문구를 띄윤다.
+         * 연결된 디바이스가 없으면 "연결된 디바이스가 없습니다." 문구를 띄운다.
          * 연결된 디바이스가 한 개라도 있으면 애니메이션을 iconCircle을 돌아가게끔 애니메이션을 set 해주고 "위험한 소리를 감지하고 있습니다.."라는 문구를 띄워준다.
          */
         iconCircle = (ImageView)findViewById(R.id.iconCircle);
@@ -284,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder builder= null;
 
         /**
-         * Oreo 버전(API26 버전)이상에서는 알림시에 NotificationChannel 이라는 개념이 필수 구성요소가 됨.
+         * Oreo 버전(API26 버전)이상에서는 알림시에 NotificationChannel 이라는 개념이 필수 구성요소가 되었다.
          */
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             String channelID="channel_01"; //알림채널 식별자
@@ -304,6 +305,14 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap bm= BitmapFactory.decodeResource(getResources(),R.drawable.group221);
         builder.setLargeIcon(bm);//매개변수가 Bitmap을 줘야한다.
+
+        /**
+         * 푸쉬 알림을 누르면 앱의 MainActivity가 실행된다.
+         */
+        PendingIntent intent;
+        intent = PendingIntent.getActivity(this, 0, new Intent(getApplicationContext(), MainActivity.class),
+                PendingIntent.FLAG_MUTABLE);
+        builder.setContentIntent(intent);
 
         Notification notification=builder.build();
         notificationManager.notify(1, notification);
