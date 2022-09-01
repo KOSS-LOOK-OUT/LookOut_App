@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
             builder= new NotificationCompat.Builder(MainActivity.this, (Notification) null);
         }
 
-        builder.setSmallIcon(android.R.drawable.ic_menu_view);
+        builder.setSmallIcon(R.drawable.group221);
         builder.setContentTitle("위험 감지");
         builder.setContentText("\"" + s + "\" 소리가 감지되었습니다!");
 
