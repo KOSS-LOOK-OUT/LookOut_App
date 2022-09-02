@@ -136,7 +136,7 @@ public class MessageActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }//end of OnClickHandler
+    }//end of goMainDialog
 
     /**
      * 이전버튼 무력화를 위한 함수
