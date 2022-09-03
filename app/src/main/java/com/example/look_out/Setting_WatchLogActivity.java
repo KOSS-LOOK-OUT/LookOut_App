@@ -11,9 +11,11 @@ package com.example.look_out;
  * 초기화 버튼을 누르면 기록들이 모두 초기화된다.
  * 알림은 최대 50개까지 보이며 50개가 넘어갈 시 가장 오래된 로그부터 먼저 삭제 된다.
  */
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -36,7 +38,7 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
     private ListView listView;
     private Button resetButton;
     private TextView status;
-
+    ArrayAdapter<String> adapter;
     /**
      * 알림 기록을 저장하기 위한 리스트
      */
@@ -69,7 +71,7 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         });
 
         listView = (ListView)findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, allog){
             /**
              * listView의 폰트 색상을 바꾸기 위해 쓰인 함수
              * @param position 각 value의 위치
@@ -111,6 +113,24 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
+                resetLogDialog();
+            }
+        });
+    }//end of onCreate
+
+    public void resetLogDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("확인").setMessage("알람 기록을 초기화하시겠습니까?");
+
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 allog.clear();
                 al_log.clear();
 
@@ -122,7 +142,10 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-    }//end of onCreate
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }//end of resetLogDialog
 
     /**
      * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
