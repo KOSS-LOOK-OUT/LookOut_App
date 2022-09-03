@@ -10,17 +10,14 @@ package com.example.look_out;
  */
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Setting_AlarmActivity extends AppCompatActivity {
     /**
@@ -38,10 +35,6 @@ public class Setting_AlarmActivity extends AppCompatActivity {
      */
     Boolean sound;
 
-    /**
-     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
-     */
-    public static Context context_main;
     private ImageView backButton;
     private TextView vibrationinform;
 
@@ -54,11 +47,6 @@ public class Setting_AlarmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_alarm);
-
-        /**
-         *다른 Activity에서 context변수를 통해 Setting_AlarmActivity에 접근이 가능하게 한다.
-         */
-        context_main = this;
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {

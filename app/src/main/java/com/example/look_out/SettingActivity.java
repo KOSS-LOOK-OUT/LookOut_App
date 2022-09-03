@@ -13,16 +13,11 @@ package com.example.look_out;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity {
 

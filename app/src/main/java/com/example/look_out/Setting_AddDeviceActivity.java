@@ -45,11 +45,6 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
     private EditText deviceAddId;
 
     /**
-     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
-     */
-    public static Context context_main;
-
-    /**
      * 디바이스의 인증번호
      */
     String key;
@@ -86,11 +81,6 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_device_add);
-
-        /**
-         *다른 Activity에서 context변수를 통해 MainActivity에 접근이 가능하게 한다.
-         */
-        context_main = this;
 
         /**
          * SharedPreferences의 키 값 SETTINGS_PLAYER_JSON2에 접근해 Json형식의 String을 읽어와 다시 ArrayList로 변환해 device_uuid에 저장한다.

@@ -14,10 +14,8 @@ package com.example.look_out;
  */
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,11 +24,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Message_DefaultActivity extends AppCompatActivity {
-
-    /**
-     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
-     */
-    public static Context context_main;
 
     private ImageView backButton;
     private Button saveButton;
@@ -67,11 +60,6 @@ public class Message_DefaultActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
         message = sharedPreferences.getString("message", "");
         et_setting.setText(message);
-
-        /**
-         * 다른 Activity에서 context변수를 통해 MainActivity에 접근이 가능하게 한다.
-         */
-        context_main = this;
 
         /**
          * 이전 버튼을 누르면 설정 창으로 이동한다.

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.KeyEvent;
@@ -31,6 +32,10 @@ public class MessageActivity extends AppCompatActivity {
     private Button sendButton;
     private TextView tv;
 
+    /**
+     * 저장할 파일 이름
+     */
+    String shared = "file";
     /**
      * 입력 될 메세지 내용
      */
@@ -59,13 +64,10 @@ public class MessageActivity extends AppCompatActivity {
         value = ((MainActivity)MainActivity.context_main).value;
 
         /**
-         * @throws NullPointerException 기본값을 설정해놓지 않으면 발생한다
+         * sharedPreference를 사용해 사용자가 입력한 문자 값을 받아온다.
          */
-        try {
-            message = ((Message_DefaultActivity)Message_DefaultActivity.context_main).message;
-        } catch (NullPointerException e) {
-            message = "";
-        }
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+        message = sharedPreferences.getString("message", "");
 
         /**
          * value에 들어온 값에 따라 문자를 전송할 번호를 지정한다.

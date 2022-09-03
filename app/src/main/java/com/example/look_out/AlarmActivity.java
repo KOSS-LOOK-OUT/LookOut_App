@@ -16,6 +16,7 @@ package com.example.look_out;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -44,6 +45,11 @@ public class AlarmActivity extends AppCompatActivity {
      * 문자를 연결할 전화번호
      */
     String phoneNo;
+
+    /**
+     * 저장할 파일 이름
+     */
+    String shared = "file";
     private TextView textView;
     private ImageView imageView;
 
@@ -84,14 +90,10 @@ public class AlarmActivity extends AppCompatActivity {
         textView.setText("\"" + value + "\" 소리가\n 감지되었습니다!");
 
         /**
-         * 사용자가 알림 설정에 들어가서 진동 유무를 설정했으면 Boolean값으로 받아온다.
-         * @throws NullPointerException 사용자가 설정을 하지 않았으면 false 값으로 기본값을 준다.
+         * sharedPreference를 사용해 사용자가 설정한 값에 따라 진동 유무를 지정한다.
          */
-        try {
-            sound = ((Setting_AlarmActivity) Setting_AlarmActivity.context_main).sound;
-        } catch (NullPointerException e) {
-            sound = false;
-        }
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+        sound = sharedPreferences.getBoolean("switch", false);
 
         /**
          * 소리 감지시 디바이스에 울리는 진동을 설정한다.
