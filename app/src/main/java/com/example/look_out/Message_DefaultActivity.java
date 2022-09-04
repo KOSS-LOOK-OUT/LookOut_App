@@ -96,16 +96,13 @@ public class Message_DefaultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 message = et_setting.getText().toString();
-                if(message.equals("")){
-                    Toast.makeText(getApplicationContext(), "문구를 입력해주세요.", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("message", message);
-                    editor.commit();
-                    Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
-                }
+
+                SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("message", message);
+                editor.commit();
+                Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
+
             }
         });
 
