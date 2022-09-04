@@ -7,13 +7,11 @@ package com.example.look_out;
  * 비상 상황에 문자 전송을 하기 위한 창을 나타내는 클래스
  * 사용 방법:
  * 디바이스 이름과 인증번호를 입력한 후, 추가 버튼을 누르면 디바이스가 추가된다.
- * 존재하지 않는 인증번호를 입력하거나, 이름을 입력하지 않은 상태로 추가 버튼을 누를시
- * 사용자에게 연결할 수 없다는 안내 창과 함께 연결에 실패하게 된다.
+ * 존재하지 않는 인증번호를 입력하거나, 이름을 입력하지 않은 상태로 추가 버튼을 누를 시 사용자에게 연결할 수 없다는 안내 창과 함께 연결에 실패하게 된다.
  */
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,17 +23,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.ArrayList;
 
 

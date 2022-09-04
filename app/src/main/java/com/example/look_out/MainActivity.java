@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -39,16 +38,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -222,17 +218,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /**
-         * 전화 걸기 권한 ID 가져오기
+         * 전화, 문자 권한 ID 가져온다.
          */
         int permissionCall = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE);
-        /**
-         * 문자 보내기 권한 ID 가져오기
-         */
         int permissionSMS = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS);
 
         /**
-         * 전화 권한, 문자 권한 중 하나라도 허용되지 않았으면 실행
-         * 사용자가 권한 요청을 명시적으로 거부하였는지 권한 요청을 처음 보거나 다시 묻지 묻지 않음으로 선택하였는지 확인한 후 전화 권한, 문자 권한 요청
+         * 전화 권한, 문자 권한 중 하나라도 허용되지 않았으면 실행한다.
+         * 사용자가 권한 요청을 명시적으로 거부하였는지 권한 요청을 처음 보거나 다시 묻지 묻지 않음으로 선택하였는지 확인한 후 전화 권한, 문자 권한 요청한다.
          */
         if (permissionCall == PackageManager.PERMISSION_DENIED || permissionSMS == PackageManager.PERMISSION_DENIED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.CALL_PHONE)|| ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.SEND_SMS)) {

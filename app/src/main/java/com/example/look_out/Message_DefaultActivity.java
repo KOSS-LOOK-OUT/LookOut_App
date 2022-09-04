@@ -13,7 +13,6 @@ package com.example.look_out;
  * 초기화를 누르면 입력했던 내용을 한번에 지울 수 있다.
  */
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;

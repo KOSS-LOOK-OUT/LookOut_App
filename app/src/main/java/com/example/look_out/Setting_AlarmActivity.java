@@ -9,7 +9,6 @@ package com.example.look_out;
  *스위치를 켜면 알림이 울릴 때 진동이 울리도록 한다.
  */
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -76,10 +75,10 @@ public class Setting_AlarmActivity extends AppCompatActivity {
         Sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             /**
              * 스위치값에 따라 진동 유무를 AlarmAcitivty에 전송하는 함수
-             * @param buttonView 연결 된 스위치값
-             * @param isChecked 스위치의 상태를 받아온다
              * 스위치 값이 바뀔 경우 바뀐 상태를 AlarmAcitivity에 전송하고 커밋한다.
              * 또한 바뀐 스위치값에 따라 설정 정보를 수정한다.
+             * @param buttonView 연결 된 스위치값
+             * @param isChecked 받아온 스위치의 상태
              */
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
