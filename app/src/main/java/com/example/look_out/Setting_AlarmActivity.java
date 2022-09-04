@@ -63,7 +63,7 @@ public class Setting_AlarmActivity extends AppCompatActivity {
          */
         Sound = findViewById(R.id.Sound);
         SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-        sound = sharedPreferences.getBoolean("switch", false);
+        sound = sharedPreferences.getBoolean("switch", true);
         Sound.setChecked(sound);
 
         vibrationinform = (TextView) findViewById(R.id.vibrationinform);

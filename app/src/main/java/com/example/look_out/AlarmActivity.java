@@ -8,7 +8,7 @@ package com.example.look_out;
  * @version 2.0
  * 화면상에 감지된 소리의 알림창을 띄우며 메시지 보내기 버튼과 전화 걸기 버튼, 알림 끄기 버튼을 구현하기 위한 클래스
  * 사용 방법:
- * 특정 위험 소리가 감지되면("불이야", "도둑이야", "조심해") 해당 소리가 감지되었다는 알림창이 뜨며 디바이스에 진동이 울린다.
+ * 특정 위험 소리가 감지되면("불이야", "도둑이야", "조심해") 해당 소리가 감지되었다는 알림창이 뜨고 사용자의 설정에 따라 진동이 온다. (기본 값: 진동 true)
  * 'ooo로 전화' 버튼을 누르면 응급 번호(119 또는 112)로 전화가 걸리며 알림이 멈춘다.
  * 'ooo로 문자' 버튼을 누르면 메세지 전송을 위한 엑티비티로 이동하며 알림이 멈춘다.
  * '알림 끄기' 버튼을 누르면 진동이 멈추며 메인 엑티비티로 창이 이동한다.
@@ -93,7 +93,7 @@ public class AlarmActivity extends AppCompatActivity {
          * sharedPreference를 사용해 사용자가 설정한 값에 따라 진동 유무를 지정한다.
          */
         SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
-        sound = sharedPreferences.getBoolean("switch", false);
+        sound = sharedPreferences.getBoolean("switch", true);
 
         /**
          * 소리 감지시 디바이스에 울리는 진동을 설정한다.
