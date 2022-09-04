@@ -161,9 +161,9 @@ public class MessageActivity extends AppCompatActivity {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNumber, null, message_119, null, null);
-            Toast.makeText(getApplicationContext(), "SMS succeed!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "성공적으로 전송되었습니다.", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "SMS failed!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "전송 실패. 다시 전송해주세요.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
