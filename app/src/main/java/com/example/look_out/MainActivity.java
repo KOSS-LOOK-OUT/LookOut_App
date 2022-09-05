@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                         al_log.add(getTime() + " 불이야");
                         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                         makePush(value);
+                        intent.putExtra("value", "불이야");
                         startActivity(intent);
 
 
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         al_log.add(getTime() + " 도둑이야");
                         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                         makePush(value);
+                        intent.putExtra("value", "도둑이야");
                         startActivity(intent);
 
                     } else if ("조심해".equals(value)) {
@@ -197,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                         al_log.add(getTime() + " 조심해");
                         setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
                         makePush(value);
+                        intent.putExtra("value", "조심해");
                         startActivity(intent);
                     }
                 }

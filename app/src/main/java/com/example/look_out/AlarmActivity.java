@@ -66,7 +66,7 @@ public class AlarmActivity extends AppCompatActivity {
         /**
          * MainActivity에서 firebase를 통해 받아온 "불이야", "도둑이야", "조심해" 키워드 값을 저장한다.
          */
-        value = ((MainActivity) MainActivity.context_main).value;
+        value = getIntent().getStringExtra("value");
 
         callButton = (Button) findViewById(R.id.callButton);
         messageButton = (Button) findViewById(R.id.messageButton);
@@ -137,6 +137,7 @@ public class AlarmActivity extends AppCompatActivity {
             public void onClick(View view) {
                 vibrator.cancel();
                 Intent intent = new Intent(AlarmActivity.this, MessageActivity.class);
+                intent.putExtra("phoneNo", phoneNo);
                 startActivity(intent); //엑티비티 이동
             }
         });

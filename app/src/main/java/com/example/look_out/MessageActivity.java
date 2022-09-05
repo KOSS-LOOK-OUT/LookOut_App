@@ -61,23 +61,16 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        value = ((MainActivity)MainActivity.context_main).value;
+        /**
+         * AlarmActivity에서 상황에 맞게 설정된 번호를 저장한다.
+         */
+        phoneNo = getIntent().getStringExtra("phoneNo");
 
         /**
          * sharedPreference를 사용해 사용자가 입력한 문자 값을 받아온다.
          */
         SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
         message = sharedPreferences.getString("message", "");
-
-        /**
-         * value에 들어온 값에 따라 문자를 전송할 번호를 지정한다.
-         */
-        if ("도둑이야".equals(value)){
-            phoneNo = "112";
-        }
-        else {
-            phoneNo = "119";
-        }
 
         et_default = (EditText)findViewById(R.id.et_default);
         et_default.setHint(phoneNo + "에 전송할 문자를 입력해주세요.");
