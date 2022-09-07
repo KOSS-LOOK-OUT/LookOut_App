@@ -42,11 +42,6 @@ public class MessageActivity extends AppCompatActivity {
     String message;
 
     /**
-     * 감지된 소리의 내용(불이야, 조심해, 도둑이야)
-     */
-    String value;
-
-    /**
      * 문자를 연결할 전화번호
      */
     String phoneNo;
@@ -83,10 +78,10 @@ public class MessageActivity extends AppCompatActivity {
         sendButton = (Button) findViewById(R.id.sendButton);
         sendButton.setText(phoneNo + " 전송");
 
-        /**
-         * sendButton을 누르면 et_default에 입력되어 있는 문장을 지정한 번호로 전송한다.
-         */
         sendButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * sendButton을 누르면 et_default에 입력되어 있는 문장을 지정한 번호로 전송한다.
+             */
             @Override
             public void onClick(View v) {
                 String text = et_default.getText().toString();
@@ -94,11 +89,11 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * home을 누르면 메인으로 돌아갈지 확인 후 돌아간다.
-         */
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
+            /**
+             * home을 누르면 메인으로 돌아갈지 확인 후 돌아간다.
+             */
             @Override
             public void onClick(View view) {
                 goMainDialog();
@@ -131,7 +126,7 @@ public class MessageActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-    }//end of goMainDialog
+    }
 
     /**
      * 이전버튼 무력화를 위한 함수
@@ -160,5 +155,4 @@ public class MessageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-}
+}//end of class

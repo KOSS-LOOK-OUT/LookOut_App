@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Message_DefaultActivity extends AppCompatActivity {
-
     private ImageView backButton;
     private Button saveButton;
     private Button resetButton;
@@ -60,11 +59,11 @@ public class Message_DefaultActivity extends AppCompatActivity {
         message = sharedPreferences.getString("message", "");
         et_setting.setText(message);
 
-        /**
-         * 이전 버튼을 누르면 설정 창으로 이동한다.
-         */
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * 이전 버튼을 누르면 설정 창으로 이동한다.
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Message_DefaultActivity.this, SettingActivity.class);
@@ -72,11 +71,11 @@ public class Message_DefaultActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * 초기화 버튼을 누르면 입력하고 있었던 값을 지우고 토스트 메세지를 보여준다.
-         */
         resetButton = findViewById(R.id.resetButton);
         resetButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * 초기화 버튼을 누르면 입력하고 있었던 값을 지우고 토스트 메세지를 보여준다.
+             */
             @Override
             public void onClick(View view) {
                 et_setting.setText("");
@@ -84,15 +83,15 @@ public class Message_DefaultActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * 저장 버튼을 누르면 문구를 입력했는지 안했는지 확인을 한다.
-         * 문구를 입력하지 않았다면 입력하라는 토스트 메시지를 보여준다.
-         * 문구를 입력했다면 editor를 preferences에 쓰겠다고 연결한다.
-         * 키 값을 message로 한 preferences에 값을 put 한다.
-         * commit 해서 저장하고 토스트 메세지를 보여준다.
-         */
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * 저장 버튼을 누르면 문구를 입력했는지 안했는지 확인을 한다.
+             * 문구를 입력하지 않았다면 입력하라는 토스트 메시지를 보여준다.
+             * 문구를 입력했다면 editor를 preferences에 쓰겠다고 연결한다.
+             * 키 값을 message로 한 preferences에 값을 put 한다.
+             * commit 해서 저장하고 토스트 메세지를 보여준다.
+             */
             @Override
             public void onClick(View view) {
                 message = et_setting.getText().toString();
@@ -102,11 +101,9 @@ public class Message_DefaultActivity extends AppCompatActivity {
                 editor.putString("message", message);
                 editor.commit();
                 Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
-
             }
         });
-
-    }
+    }//end of onCreate
 
     /**
      * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
@@ -117,5 +114,4 @@ public class Message_DefaultActivity extends AppCompatActivity {
         Intent intent = new Intent(Message_DefaultActivity.this, SettingActivity.class);
         startActivity(intent);
     }
-
-}
+}//end of class

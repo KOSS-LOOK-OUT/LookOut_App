@@ -19,6 +19,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 public class Setting_AlarmActivity extends AppCompatActivity {
+    private ImageView backButton;
+    private TextView vibrationinform;
+
     /**
      * 알림 진동 설정을 위한 변수
      */
@@ -33,9 +36,6 @@ public class Setting_AlarmActivity extends AppCompatActivity {
      * 알림 진동 설정을 위한 변수
      */
     Boolean sound;
-
-    private ImageView backButton;
-    private TextView vibrationinform;
 
     /**
      * 필수 구현 요소
@@ -55,7 +55,6 @@ public class Setting_AlarmActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         /**
          * sound switch가 켜져있을 경우 진동이 울리도록 한다.
@@ -93,7 +92,6 @@ public class Setting_AlarmActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     /**
@@ -105,4 +103,4 @@ public class Setting_AlarmActivity extends AppCompatActivity {
         Intent intent = new Intent(Setting_AlarmActivity.this, SettingActivity.class);
         startActivity(intent);
     }
-}
+}//end of class

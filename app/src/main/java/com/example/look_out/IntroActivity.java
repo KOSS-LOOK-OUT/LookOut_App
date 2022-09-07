@@ -1,9 +1,9 @@
 package com.example.look_out;
 /**
- *@filename MessageActivity.java
- *@author 이채영
- *@version 2.0
- *앱 실행시 시작 화면을 잠깐 보여주기 위한 클래스
+ * @filename MessageActivity.java
+ * @author 이채영
+ * @version 2.0
+ * 앱 실행시 시작 화면을 잠깐 보여주기 위한 클래스
  */
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fluter);
         moveMain(1);
-    }
+    }//end of onCreate
 
     /**
      * 특정 시간만큼 시작 화면을 보여주고 메인으로 넘어가기 위한 함수
@@ -39,4 +39,4 @@ public class IntroActivity extends AppCompatActivity {
             }
         }, 1000 * sec);
     }
-}
+}//end of class

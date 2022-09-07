@@ -46,17 +46,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-
-    /**
-     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
-     */
-    public static Context context_main;
     private final long finishtimed = 1500;
     private long presstime = 0;
     private ImageView setting;
     private final int MY_PERMISSIONS_REQUEST = 1000;
     private ImageView iconCircle;
     private TextView statusMessage;
+    private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
+    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
+
+    /**
+     * 다른 액티비티에서 이 액티비티의 변수와 정보들을 참조하기 위해 만든 변수
+     */
+    public static Context context_main;
 
     /**
      * 감지된 소리의 내용(불이야, 조심해, 도둑이야)
@@ -77,9 +79,6 @@ public class MainActivity extends AppCompatActivity {
      * 등록된 디바이스들의 uuid를 저장하기 위한 리스트
      */
     ArrayList<String> device_uuid = new ArrayList<>();
-
-    private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
-    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
 
     /**
      * 필수 구현 요소
@@ -141,18 +140,14 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
 
             @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println("The read failed: " + error.getCode());
             }
         });
 
@@ -172,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
                     value = dataSnapshot.getValue(String.class);
-
                     if ("불이야".equals(value)) {
                         alarm("불이야");
                     } else if ("도둑이야".equals(value)) {
@@ -183,13 +177,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                }
+                public void onChildRemoved(DataSnapshot dataSnapshot) {}
 
                 @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                }
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -213,16 +204,15 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST);
             } else {
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST);
-
             }
         }
 
-        /**
-         * activity_main.xml파일에서 id가 setting으로 설정된 View를 가져온다.
-         * setting이 눌릴 때, MainActivity에서 SettingActivity로 이동한다.
-         */
         setting = findViewById(R.id.setting);
         setting.setOnClickListener(new View.OnClickListener() {
+            /**
+             * activity_main.xml파일에서 id가 setting으로 설정된 View를 가져온다.
+             * setting이 눌릴 때, MainActivity에서 SettingActivity로 이동한다.
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
@@ -347,5 +337,4 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("value", value);
         startActivity(intent);
     }
-
 }//end of class

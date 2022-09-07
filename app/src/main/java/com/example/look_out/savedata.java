@@ -9,7 +9,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public  class savedata {
+public class savedata {
 
     /**
      * ArrayList를 Json으로 변환하여 SharedPreferences에 String을 저장한다.
@@ -18,7 +18,6 @@ public  class savedata {
      * @param values String 형태로 저장할 ArrayList
      */
     public static void setStringArrayPref(Context context, String key, ArrayList<String> values) {
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();
         JSONArray a = new JSONArray();
@@ -32,7 +31,6 @@ public  class savedata {
         } else {
             editor.putString(key, null);
         }
-
         editor.apply();
     }
 
@@ -42,7 +40,6 @@ public  class savedata {
      * @param key SharedPreference를 받아올 key 값
      */
     public static ArrayList getStringArrayPref(Context context, String key) {
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String json = prefs.getString(key, null);
         ArrayList urls = new ArrayList();
@@ -61,5 +58,4 @@ public  class savedata {
         }
         return urls;
     }
-
 }

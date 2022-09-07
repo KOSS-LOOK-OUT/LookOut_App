@@ -33,6 +33,8 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
     private Button sendButton;
     private EditText deviceAddEdit;
     private EditText deviceAddId;
+    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
+    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
 
     /**
      * 디바이스의 인증번호
@@ -59,9 +61,6 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
      */
     ArrayList<String> device_nickname = new ArrayList<>();
 
-    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
-    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
-
     /**
      * 필수 구현 요소
      * Activity가 생성될 때 실행된다.
@@ -87,11 +86,11 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
          */
         device_key = ((MainActivity)MainActivity.context_main).device_key;
 
-        /**
-         * 메인 화면으로 넘어가기 위한 함수
-         */
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
+            /**
+             * 메인 화면으로 넘어가기 위한 함수
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Setting_AddDeviceActivity.this, MainActivity.class);
@@ -118,12 +117,8 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                  */
                 if (device_nickname.contains(nickname)){
                     Toast.makeText(getApplicationContext(), "중복된 이름입니다!", Toast.LENGTH_SHORT).show();
-                    deviceAddId.setText("");
-                    deviceAddEdit.setText("");
                 } else if(nickname.equals("")){
                     Toast.makeText(getApplicationContext(), "디바이스 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                    deviceAddId.setText("");
-                    deviceAddEdit.setText("");
                 } else if (device_key.contains(key)) {
                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference ref = database.getReference(key);
@@ -146,33 +141,26 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        }
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
                         @Override
-                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-                        }
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
 
                         @Override
-                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-                        }
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
+                            System.out.println("The read failed: " + error.getCode());
                         }
                     });
                     savedata.setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_nickname);
-                    deviceAddEdit.setText("");
-                    deviceAddId.setText("");
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "인증번호를 다시 확인해 주세요.", Toast.LENGTH_LONG).show();
-                    deviceAddEdit.setText("");
-                    deviceAddId.setText("");
                 }
+                deviceAddId.setText("");
+                deviceAddEdit.setText("");
             }
         });
     }//end of onCreate
@@ -186,7 +174,6 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         Intent intent = new Intent(Setting_AddDeviceActivity.this, SettingActivity.class);
         startActivity(intent);
     }
-
 
     /**
      * 이전버튼 무력화를 위한 함수

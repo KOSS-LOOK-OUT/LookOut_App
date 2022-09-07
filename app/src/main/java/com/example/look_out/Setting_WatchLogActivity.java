@@ -33,7 +33,13 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
     private ListView listView;
     private Button resetButton;
     private TextView status;
+    private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
+
+    /**
+     * listView에 추가 한 후 창에 띄우기 위한 ArrayAdapter
+     */
     ArrayAdapter<String> adapter;
+
     /**
      * 알림 기록을 저장하기 위한 리스트
      */
@@ -43,8 +49,6 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
      * 알림 기록을 리스트 뷰에 보여주기 위한 리스트
      */
     ArrayList<String> allog = new ArrayList<>();
-
-    private static final String SETTINGS_PLAYER_JSON = "settings_item_json";
 
     /**
      * 필수 구현 요소
@@ -137,7 +141,6 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }//end of resetLogDialog
@@ -151,5 +154,4 @@ public class Setting_WatchLogActivity extends AppCompatActivity {
         Intent intent = new Intent(Setting_WatchLogActivity.this, SettingActivity.class);
         startActivity(intent);
     }
-
 }//end of class

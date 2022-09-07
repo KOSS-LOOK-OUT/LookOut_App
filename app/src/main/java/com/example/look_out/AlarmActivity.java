@@ -23,13 +23,13 @@ import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AlarmActivity extends AppCompatActivity {
     private Button callButton;
     private Button offButton;
     private Button messageButton;
+    private TextView textView;
 
     /**
      * 알림 진동 설정을 위한 변수
@@ -50,13 +50,11 @@ public class AlarmActivity extends AppCompatActivity {
      * 저장할 파일 이름
      */
     String shared = "file";
-    private TextView textView;
-    private ImageView imageView;
 
     /**
      * 필수 구현 요소
      * Activity가 생성될 때 실행된다.
-     *@params savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
+     * @params savedInstanceState 엑티비티 이전 상태를 저장한 bundle 객체
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +82,6 @@ public class AlarmActivity extends AppCompatActivity {
             callButton.setText("119 전화");
             messageButton.setText("119 문자");
         }
-
 
         textView = (TextView) findViewById(R.id.textView);
         textView.setText("\"" + value + "\" 소리가\n 감지되었습니다!");
@@ -141,7 +138,7 @@ public class AlarmActivity extends AppCompatActivity {
                 startActivity(intent); //엑티비티 이동
             }
         });
-    }
+    }//end of onCreate
 
     /**
      * 이전버튼 무력화를 위한 함수
@@ -152,4 +149,4 @@ public class AlarmActivity extends AppCompatActivity {
     public boolean onKeyDown(int keycode, KeyEvent event) {
         return true;
     }
-}
+}//end of class

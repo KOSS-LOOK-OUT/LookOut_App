@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class SettingActivity extends AppCompatActivity {
-
     private ImageView backButton;
     private ImageButton messagedefault;
     private ImageButton settingalarm;

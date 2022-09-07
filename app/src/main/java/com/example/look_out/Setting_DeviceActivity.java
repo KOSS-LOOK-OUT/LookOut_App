@@ -37,6 +37,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
     private Button addButton;
     private Button deleteButton;
     private ListView listView;
+    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
+    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
 
     /**
      * 저장된 디바이스들을 보여주는 listView를 만들기 위한 리스트
@@ -57,9 +59,6 @@ public class Setting_DeviceActivity extends AppCompatActivity {
      * listView에 추가 한 후 창에 띄우기 위한 ArrayAdapter
      */
     ArrayAdapter<String> adapter;
-
-    private static final String SETTINGS_PLAYER_JSON2 = "settings_item_json2";
-    private static final String SETTINGS_PLAYER_JSON3 = "settings_item_json3";
 
     /**
      * 필수 구현 요소
@@ -127,7 +126,6 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 }
             }
         }) ;
-
     }//end of onCreate
 
     /**
@@ -194,7 +192,6 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 }, 200);
             }
         });
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }//end of removeDeviceDialog
@@ -208,5 +205,4 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         Intent intent = new Intent(Setting_DeviceActivity.this, SettingActivity.class);
         startActivity(intent);
     }
-
 }//end of class
