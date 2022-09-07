@@ -25,13 +25,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -43,8 +41,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import org.json.JSONArray;
-import org.json.JSONException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -104,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
         /**
          * SharedPreferences에 키값 SETTINGS_PLAYER_JSON2에 접근해서 Json 형식의 String을 읽어와 다시 ArrayList로 변환해 device_uuid에 저장한다.
          */
-        device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        device_uuid = savedata.getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
 
         /**
          * SharedPreferences에 키값 SETTINGS_PLAYER_JSON에 접근해서 Json 형식의 String을 읽어와 다시 ArrayList로 변환해 al_log에 저장한다.
          */
-        al_log = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
+        al_log = savedata.getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON);
 
 
         /**
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = al_log.size() - 51; i >= 0; i--) {
                 al_log.remove(i);
             }
-            setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+            savedata.setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
         }
 
         /**
@@ -178,29 +174,11 @@ public class MainActivity extends AppCompatActivity {
                     value = dataSnapshot.getValue(String.class);
 
                     if ("불이야".equals(value)) {
-                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                        al_log.add(getTime() + " 불이야");
-                        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
-                        makePush(value);
-                        intent.putExtra("value", "불이야");
-                        startActivity(intent);
-
-
+                        alarm("불이야");
                     } else if ("도둑이야".equals(value)) {
-                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                        al_log.add(getTime() + " 도둑이야");
-                        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
-                        makePush(value);
-                        intent.putExtra("value", "도둑이야");
-                        startActivity(intent);
-
+                        alarm("도둑이야");
                     } else if ("조심해".equals(value)) {
-                        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                        al_log.add(getTime() + " 조심해");
-                        setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
-                        makePush(value);
-                        intent.putExtra("value", "조심해");
-                        startActivity(intent);
+                        alarm("조심해");
                     }
                 }
 
@@ -312,9 +290,6 @@ public class MainActivity extends AppCompatActivity {
 
         Notification notification=builder.build();
         notificationManager.notify(1, notification);
-
-
-
     }
 
     /**
@@ -359,57 +334,18 @@ public class MainActivity extends AppCompatActivity {
         String getTime = dateFormat.format(date);
         return getTime;
     }
-    
-
 
     /**
-     * ArrayList를 Json으로 변환하여 SharedPreferences에 String을 저장한다.
-     * @param context 애플리케이션의 현재 상태
-     * @param key SharedPreference를 보낼 key 값
-     * @param values String 형태로 저장할 ArrayList
+     * 현재시간과 value값을 로그로 저장하고 AlarmActivity를 실행한다.
+     * @param value 감지한 키워드 값
      */
-    private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = prefs.edit();
-        JSONArray a = new JSONArray();
-
-        for (int i = 0; i < values.size(); i++) {
-            a.put(values.get(i));
-        }
-
-        if (!values.isEmpty()) {
-            editor.putString(key, a.toString());
-        } else {
-            editor.putString(key, null);
-        }
-
-        editor.apply();
+    private void alarm(String value){
+        Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+        al_log.add(getTime() + " " + value);
+        savedata.setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON, al_log);
+        makePush(value);
+        intent.putExtra("value", value);
+        startActivity(intent);
     }
 
-    /**
-     * SharedPreferences에서 Json형식의 String을 가져와서 다시 ArrayList로 변환한다.
-     * @param context 애플리케이션의 현재 상태
-     * @param key SharedPreference를 받아올 key 값
-     */
-    private ArrayList getStringArrayPref(Context context, String key) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String json = prefs.getString(key, null);
-        ArrayList urls = new ArrayList();
-
-        if (json != null) {
-            try {
-                JSONArray a = new JSONArray(json);
-
-                for (int i = 0; i < a.length(); i++) {
-                    String url = a.optString(i);
-                    urls.add(url);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return urls;
-    }
 }//end of class

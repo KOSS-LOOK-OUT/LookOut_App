@@ -14,15 +14,12 @@ package com.example.look_out;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +29,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.json.JSONArray;
-import org.json.JSONException;
 import java.util.ArrayList;
+
 
 public class Setting_DeviceActivity extends AppCompatActivity {
     private ImageView backButton;
@@ -75,8 +71,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_device);
 
-        device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
-        device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
+        device_uuid = savedata.getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        device_nickname = savedata.getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -172,8 +168,8 @@ public class Setting_DeviceActivity extends AppCompatActivity {
                 /**
                  * ArrayList의 데이터를 Json 형식으로 변환하여 1개의 String으로 만든 후 이를 SharedPreferences에 각각의 키 값으로 저장한다.
                  */
-                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
-                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_nickname);
+                savedata.setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
+                savedata.setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_nickname);
 
                 listView.clearChoices() ;
                 adapter.notifyDataSetChanged();
@@ -211,57 +207,6 @@ public class Setting_DeviceActivity extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(Setting_DeviceActivity.this, SettingActivity.class);
         startActivity(intent);
-    }
-
-    /**
-     * ArrayList를 Json으로 변환하여 SharedPreferences에 String을 저장한다.
-     * @param context 애플리케이션의 현재 상태
-     * @param key SharedPreference를 보낼 key 값
-     * @param values String 형태로 저장할 ArrayList
-     */
-    private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = prefs.edit();
-        JSONArray a = new JSONArray();
-
-        for (int i = 0; i < values.size(); i++) {
-            a.put(values.get(i));
-        }
-
-        if (!values.isEmpty()) {
-            editor.putString(key, a.toString());
-        } else {
-            editor.putString(key, null);
-        }
-
-        editor.apply();
-    }
-
-    /**
-     * SharedPreferences에서 Json형식의 String을 가져와서 다시 ArrayList로 변환한다.
-     * @param context 애플리케이션의 현재 상태
-     * @param key SharedPreference를 받아올 key 값
-     */
-    private ArrayList getStringArrayPref(Context context, String key) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String json = prefs.getString(key, null);
-        ArrayList urls = new ArrayList();
-
-        if (json != null) {
-            try {
-                JSONArray a = new JSONArray(json);
-
-                for (int i = 0; i < a.length(); i++) {
-                    String url = a.optString(i);
-                    urls.add(url);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return urls;
     }
 
 }//end of class

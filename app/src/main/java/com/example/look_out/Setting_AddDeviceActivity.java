@@ -12,11 +12,8 @@ package com.example.look_out;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +25,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import org.json.JSONArray;
-import org.json.JSONException;
 import java.util.ArrayList;
 
 
@@ -80,12 +75,12 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         /**
          * SharedPreferences의 키 값 SETTINGS_PLAYER_JSON2에 접근해 Json형식의 String을 읽어와 다시 ArrayList로 변환해 device_uuid에 저장한다.
          */
-        device_uuid = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
+        device_uuid = savedata.getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2);
 
         /**
          * SharedPreferences의 키 값 SETTINGS_PLAYER_JSON3에 접근해 Json형식의 String을 읽어와 다시 ArrayList로 변환해 device_nickname에 저장한다.
          */
-        device_nickname = getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
+        device_nickname = savedata.getStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3);
 
         /**
          * MainActivity의 device_key 값을 가져온다.
@@ -146,7 +141,7 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
                         public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                             if(!snapshot.getValue().toString().equals("true")){
                                 device_uuid.add(snapshot.getValue().toString());
-                                setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
+                                savedata.setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON2, device_uuid);
                             }
                         }
 
@@ -169,7 +164,7 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
 
                         }
                     });
-                    setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_nickname);
+                    savedata.setStringArrayPref(getApplicationContext(), SETTINGS_PLAYER_JSON3, device_nickname);
                     deviceAddEdit.setText("");
                     deviceAddId.setText("");
                 }
@@ -192,56 +187,6 @@ public class Setting_AddDeviceActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
-     * ArrayList를 Json으로 변환하여 SharedPreferences에 String을 저장한다.
-     * @param context 애플리케이션의 현재 상태
-     * @param key SharedPreference를 보낼 key 값
-     * @param values String 형태로 저장할 ArrayList
-     */
-    private void setStringArrayPref(Context context, String key, ArrayList<String> values) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = prefs.edit();
-        JSONArray a = new JSONArray();
-
-        for (int i = 0; i < values.size(); i++) {
-            a.put(values.get(i));
-        }
-
-        if (!values.isEmpty()) {
-            editor.putString(key, a.toString());
-        } else {
-            editor.putString(key, null);
-        }
-
-        editor.apply();
-    }
-
-    /**
-     * SharedPreferences에서 Json형식의 String을 가져와서 다시 ArrayList로 변환한다.
-     * @param context 애플리케이션의 현재 상태
-     * @param key SharedPreference를 받아올 key 값
-     */
-    private ArrayList getStringArrayPref(Context context, String key) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String json = prefs.getString(key, null);
-        ArrayList urls = new ArrayList();
-
-        if (json != null) {
-            try {
-                JSONArray a = new JSONArray(json);
-
-                for (int i = 0; i < a.length(); i++) {
-                    String url = a.optString(i);
-                    urls.add(url);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return urls;
-    }
 
     /**
      * 이전버튼 무력화를 위한 함수
