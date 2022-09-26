@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 안드로이드 폰에 내장된 이전버튼을 눌렀을 경우 구조적으로 이전 activity인 창으로 넘어가게 한다.
+     * 이전 버튼을 한 번 누르면 한번 더 이전버튼을 누르면 앱이 종료된다는 메세지가 뜨고 1.5초안에 한 번 더 누르면 앱이 종료된다.
      */
     public void onBackPressed () {
         long tempTime = System.currentTimeMillis();
